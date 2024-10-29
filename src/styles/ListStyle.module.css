@@ -1,0 +1,34 @@
+.list__item {
+  cursor: pointer;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.list__item_active {
+  color: var(--primary-main);
+}
+
+.list__item_active .list__icon {
+  color: var(--primary-main);
+}
+
+.box {
+  border-radius: 10px;
+  padding: 5px 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.box:hover {
+  background-color: var(--hover-bg);
+}
+
+.list__icon {
+  font-size: 24px;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.box:hover .list__icon {
+  color: var(--primary-main);
+}
