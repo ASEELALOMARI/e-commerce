@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 function UserNavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -17,7 +18,7 @@ function UserNavBar() {
   return (
     <>
       <IconButton color="inherit" onClick={handleMenuOpen}>
-        <AccountCircle sx={{ color: 'var(--primary-main)' }} />
+        <AccountCircle sx={{ color: "var(--primary-main)" }} />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
@@ -25,8 +26,12 @@ function UserNavBar() {
         onClose={handleMenuClose}
         sx={{ mt: 3 }}
       >
-        <MenuItem onClick={handleMenuClose}>Register</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Log In</MenuItem>
+        <MenuItem onClick={handleMenuClose} component={Link} to="/register">
+          Register
+        </MenuItem>
+        <MenuItem onClick={handleMenuClose} component={Link} to="/login">
+          Log In
+        </MenuItem>
       </Menu>
     </>
   );

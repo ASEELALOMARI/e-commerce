@@ -2,6 +2,8 @@ import { createBrowserRouter, Outlet } from "react-router-dom";
 import Products from "../components/products/Products";
 import StoreLayout from "../components/layouts/StoreLayout";
 import DashboardLayout from "../components/layouts/DashboardLayout";
+import LoginForm from "../components/auth/LoginForm";
+import RegisterForm from "../components/auth/RegisterForm";
 
 
 const PropertyWrapper = () => <Outlet />;
@@ -13,10 +15,20 @@ const Index = createBrowserRouter([
       {
         path: "/",
         element: <StoreLayout/>,
-      },
-      {
-        path: "products",
-        element: <Products />,
+        children: [
+          {
+            path: "login",
+            element: <LoginForm />,
+          },
+          {
+            path: "register",
+            element: <RegisterForm />,
+          },
+          {
+            path: "products",
+            element: <Products />,
+          },
+        ],
       },
       {
         path: "admin",
