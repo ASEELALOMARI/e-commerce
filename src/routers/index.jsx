@@ -1,5 +1,7 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import Products from "../components/products/Products";
+import StoreLayout from "../components/layouts/StoreLayout";
+
 
 const PropertyWrapper = () => <Outlet />;
 
@@ -9,7 +11,7 @@ const Index = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <div>Home</div>,
+        element: <StoreLayout/>,
       },
       {
         path: "products",
