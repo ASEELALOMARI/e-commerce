@@ -1,14 +1,13 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box, Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import SearchOffIcon from "@mui/icons-material/SearchOff";
+import LockIcon from "@mui/icons-material/Lock"; 
 
-const NotFound = ({ message = "No data found." }) => {
+const NotAuthorized = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate("/"); // Redirect to the home page or any other route
+    navigate("/"); 
   };
 
   return (
@@ -23,16 +22,16 @@ const NotFound = ({ message = "No data found." }) => {
         padding: 3,
       }}
     >
-      {/* Icon to indicate "not found" visually */}
-      <SearchOffIcon sx={{ fontSize: 80, color: "var(--primary-dark)", marginBottom: 2 }} />
+      {/* Icon to indicate "not authorized" visually */}
+      <LockIcon sx={{ fontSize: 80, color: "var(--primary-dark)", marginBottom: 2 }} />
 
       {/* Message */}
       <Typography variant="h4" sx={{ fontWeight: 500, color: "text.secondary" }}>
-        {message}
+        Access Denied
       </Typography>
 
       <Typography variant="body1" color="text.secondary" sx={{ marginTop: 1 }}>
-        We couldn’t find any products at this moment. Try refreshing the page or come back later.
+        You don't have permission to view this page. Please contact your administrator if you believe this is a mistake.
       </Typography>
 
       {/* Go Back Button */}
@@ -48,8 +47,5 @@ const NotFound = ({ message = "No data found." }) => {
   );
 };
 
-NotFound.prototype = {
-  message: PropTypes.string,
-}
 
-export default NotFound;
+export default NotAuthorized;

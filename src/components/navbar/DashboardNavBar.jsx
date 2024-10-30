@@ -1,29 +1,52 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, IconButton, Menu, MenuItem, Box, Divider } from "@mui/material";
-import { Notifications, AccountCircle } from "@mui/icons-material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Menu,
+  MenuItem,
+  Box,
+  Divider,
+} from "@mui/material";
+import { Notifications, AccountCircle, Logout } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-import reactLogo from '../../assets/react.svg';
+import reactLogo from "../../assets/react.svg";
+import useAuth from "../../hooks/UseAuth";
 
 const DashboardNavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  const { logout } = useAuth();
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+
+  const handleLogout = () => {
+    logout();
+    handleMenuClose();
+  };
 
   // Handle user menu open/close
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  
+
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white", boxShadow: "none", paddingX: 2 }}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "white", boxShadow: "none", paddingX: 2 }}
+    >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-        
         {/* Left Section: Logo and Title */}
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <img src={reactLogo} alt="Store Logo" style={{ height: 40, marginRight: 10 }} />
+          <img
+            src={reactLogo}
+            alt="Store Logo"
+            style={{ height: 40, marginRight: 10 }}
+          />
           <Typography variant="h6" sx={{ color: "text.secondary" }}>
             Admin Dashboard
           </Typography>
@@ -31,6 +54,11 @@ const DashboardNavBar = () => {
 
         {/* Right Section: Notification and User Icons */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          {/*admin name */}
+          <Typography variant="subtitle2" sx={{ color: "gray" }}>
+            👋{storedUser.username}
+          </Typography>
+
           {/* Notification Icon */}
           <IconButton color="inherit">
             <Notifications sx={{ color: "gray" }} />
@@ -38,7 +66,7 @@ const DashboardNavBar = () => {
 
           {/* User Icon with Dropdown */}
           <IconButton color="inherit" onClick={handleMenuOpen}>
-            <AccountCircle sx={{ color: 'var(--primary-main)'  }} />
+            <AccountCircle sx={{ color: "var(--primary-main)" }} />
           </IconButton>
           <Menu
             anchorEl={anchorEl}
@@ -49,12 +77,17 @@ const DashboardNavBar = () => {
             <MenuItem onClick={handleMenuClose} component={Link} to="/">
               Back to Store
             </MenuItem>
-            <Divider/>
-            <MenuItem onClick={handleMenuClose} component={Link} to="admin/profile">
+            <Divider />
+            <MenuItem
+              onClick={handleMenuClose}
+              component={Link}
+              to="admin/profile"
+            >
               Admin Profile
             </MenuItem>
-            <MenuItem onClick={handleMenuClose} component={Link} to="admin/profile">
-              logout
+            <MenuItem onClick={handleLogout}>
+              <Logout fontSize="small" sx={{ marginRight: 1 }} />
+              Log Out
             </MenuItem>
           </Menu>
         </Box>
