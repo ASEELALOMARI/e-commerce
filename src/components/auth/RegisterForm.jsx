@@ -1,35 +1,75 @@
 import React, { useState } from "react";
-import { Box, TextField, Button, Typography } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  CircularProgress,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 
-import { formContainerStyles, textFieldStyles, buttonStyles } from "../../styles/FormStyle";
-//import useAuth from "../../hooks/UseAuthContext";
+import {
+  formContainerStyles,
+  textFieldStyles,
+  buttonStyles,
+} from "../../styles/FormStyle";
+import useAuth from "../../hooks/UseAuth";
 
 const RegisterForm = () => {
-  const [formData, setFormData] = useState({ username: "", email: "", password: "" });
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    address: "",
+    phoneNumber: "",
+  });
   const navigate = useNavigate();
-  //const { register } = useAuth();
+  const { register, AuthError, AuthSuccess, isLoading } = useAuth();
+  const [errorMessage, setErrorMessage] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const isValidationInput = () => {
+    const newErrors = {};
+    if (!formData.username.trim() || formData.username.trim().length < 2) {
+      newErrors.title = "Username must be at least 2 characters";
+    }
+    //todo complete the validation
+
+    setErrorMessage(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const registered = register(formData);
-    if (registered) {
-      toast.success("User registered successfully!");
-      navigate("login");
-    } else {
-      toast.error("Invalid credentials. Please try again.");
+
+    if (isValidationInput()) {
+      const registerData = {
+        userName: formData.username,
+        email: formData.email,
+        password: formData.password,
+        address: formData.address,
+        phoneNumber: formData.phoneNumber,
+      };
+      const registered = await register(registerData);
+      if (registered) {
+        toast.success(`User registered successfully!${AuthSuccess}`);
+        navigate("../login");
+      } else {
+        toast.error(`Invalid credentials.${AuthError} Please try again.`);
+      }
     }
   };
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={formContainerStyles}>
-      <Typography variant="h5" mb={2}>Register</Typography>
+      <Typography variant="h5" mb={2}>
+        Register
+      </Typography>
 
       <TextField
         label="Username"
@@ -70,7 +110,6 @@ const RegisterForm = () => {
         onChange={handleChange}
         variant="outlined"
         fullWidth
-        required
         type="text"
         sx={textFieldStyles}
       />
@@ -81,14 +120,23 @@ const RegisterForm = () => {
         onChange={handleChange}
         variant="outlined"
         fullWidth
-        required
         type="phone"
         sx={textFieldStyles}
       />
 
-      <Button type="submit" variant="contained" color="primary" sx={buttonStyles}>
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        sx={buttonStyles}
+      >
         Register
       </Button>
+      {isLoading && (
+        <Box m={2}>
+          <CircularProgress color="primary" />
+        </Box>
+      )}
     </Box>
   );
 };

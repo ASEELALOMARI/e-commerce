@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, TextField, Button, Typography } from "@mui/material";
+import { Box, TextField, Button, Typography, CircularProgress } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -7,12 +7,13 @@ import {
   formContainerStyles,
   textFieldStyles,
   buttonStyles,
-} from "../../styles/FormStyle";  
-//import useAuth from "../../hooks/UseAuthContext";
+} from "../../styles/FormStyle";
+import useAuth from "../../hooks/UseAuth";
+
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  //const { login } = useAuth();
+  const { login, AuthError, AuthSuccess, isLoading} = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,15 +21,15 @@ const LoginForm = () => {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const  handleSubmit  = async (e) => {
     e.preventDefault();
-    
-    const loggedIn = login(formData.email, formData.password);
+
+    const loggedIn = await login(formData.email, formData.password);
     if (loggedIn) {
-      toast.success("Logged in successfully!");
+      toast.success(`Logged in successfully:${AuthSuccess} `);
       navigate("/");
     } else {
-      toast.error("Invalid credentials. Please try again.");
+      toast.error(`Failed : ${AuthError}`);
     }
   };
 
@@ -69,6 +70,7 @@ const LoginForm = () => {
       >
         Login
       </Button>
+      {isLoading && <Box m={2}><CircularProgress color="primary" /></Box>}
     </Box>
   );
 };

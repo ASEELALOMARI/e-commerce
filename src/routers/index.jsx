@@ -4,17 +4,20 @@ import StoreLayout from "../components/layouts/StoreLayout";
 import DashboardLayout from "../components/layouts/DashboardLayout";
 import LoginForm from "../components/auth/LoginForm";
 import RegisterForm from "../components/auth/RegisterForm";
+import { AuthProvider } from "../contexts/AuthContext";
 
-
-const PropertyWrapper = () => <Outlet />;
-
+const PropertyWrapper = () => (
+  <AuthProvider>
+    <Outlet />
+  </AuthProvider>
+);
 const Index = createBrowserRouter([
   {
     element: <PropertyWrapper />,
     children: [
       {
         path: "/",
-        element: <StoreLayout/>,
+        element: <StoreLayout />,
         children: [
           {
             path: "login",
@@ -32,7 +35,7 @@ const Index = createBrowserRouter([
       },
       {
         path: "admin",
-        element: <DashboardLayout/>,
+        element: <DashboardLayout />,
       },
     ],
   },
