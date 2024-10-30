@@ -13,12 +13,12 @@ function Product({ data }) {
 
 Product.propTypes = {
   data: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    productId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
+    //image: PropTypes.string.isRequired,
+    //category: PropTypes.string.isRequired,
   }),
 };
 

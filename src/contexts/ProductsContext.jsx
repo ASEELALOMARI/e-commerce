@@ -19,11 +19,10 @@ export const ProductsProvider = ({ children }) => {
       setIsLoading(true);
       try {
           const response = await getAllProducts();
-          const data = response.data;
+          const data = response.data.items.$values;
           console.log(data);
           setProducts(data);
       } catch (error) {
-          console.error(error);
           setError(error.message);
       } finally {
           setIsLoading(false);
