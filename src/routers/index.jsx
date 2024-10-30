@@ -1,14 +1,18 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
+
 import Products from "../components/products/Products";
 import StoreLayout from "../components/layouts/StoreLayout";
 import DashboardLayout from "../components/layouts/DashboardLayout";
 import LoginForm from "../components/auth/LoginForm";
 import RegisterForm from "../components/auth/RegisterForm";
 import { AuthProvider } from "../contexts/AuthContext";
+import { ProductsProvider } from "../contexts/ProductsContext";
 
 const PropertyWrapper = () => (
   <AuthProvider>
-    <Outlet />
+    <ProductsProvider>
+      <Outlet />
+    </ProductsProvider>
   </AuthProvider>
 );
 const Index = createBrowserRouter([

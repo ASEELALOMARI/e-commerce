@@ -36,7 +36,7 @@ const RegisterForm = () => {
   const isValidationInput = () => {
     const newErrors = {};
     if (!formData.username.trim() || formData.username.trim().length < 2) {
-      newErrors.title = "Username must be at least 2 characters";
+      newErrors.username = "Username must be at least 2 characters";
     }
     //todo complete the validation
 
