@@ -13,7 +13,7 @@ export default function Products() {
 
   const productsList = products.map((product) => {
     return (
-      <Grid item key={product.productId} size={{ xs: 12, sm: 4, md: 4, lg: 3 }}>
+      <Grid item key={product.productId} size={{ xs: 9, sm: 4, md: 4, lg: 3 }}>
         <Product data={product} />
       </Grid>
     );
@@ -47,13 +47,15 @@ export default function Products() {
               </Grid>
             ))
           ) : (
-            <div style={{ width: "100%" }}>
+            <>
               {products && products.length > 0 ? (
                 <>{productsList}</>
               ) : (
-                <NotFound message="No products found" />
+                <div style={{ width: "100%" }}>
+                  <NotFound message={error} />
+                </div>
               )}
-            </div>
+            </>
           )}
         </Grid>
       </Box>

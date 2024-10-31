@@ -5,7 +5,7 @@ import React, {
   useContext,
   Children,
 } from "react";
-import { fetchProductById, getAllProducts } from "../services/ProductsService";
+import { fetchProductById, getAllProducts, getFilteredProduct } from "../services/ProductsService";
 
 export const ProductsContext = createContext();
 
@@ -19,8 +19,10 @@ export const ProductsProvider = ({ children }) => {
       setIsLoading(true);
       try {
         const response = await getAllProducts();
+        console.log(response);
         const data = response.data.items.$values;
         setProducts(data);
+        console.log(data);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -45,8 +47,23 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
+  const getFilteredData = async (search, page, pageSize) => {
+    setIsLoading(true);
+    try {
+      const response = await getFilteredProduct(search,page, pageSize);
+      const FiletedData = response.data.items.$values;
+      setProducts(FiletedData);
+      
+    } catch (error) {
+      setError(error.message);
+
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <ProductsContext.Provider value={{ products, isLoading, error, getProductById}}>
+    <ProductsContext.Provider value={{ products, isLoading, error, getProductById, getFilteredData}}>
       {children}
     </ProductsContext.Provider>
   );

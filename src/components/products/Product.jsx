@@ -9,15 +9,11 @@ import {
   Typography,
 } from "@mui/material";
 import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
-import { Link, useNavigate, useNavigation } from "react-router-dom";
-import ProductDetails from "./ProductDetails";
+import { Link } from "react-router-dom";
+
 
 function Product({ data }) {
-  const navigate = useNavigation();
-  const productsDetailsPage = ()=>
-  {
-    <ProductDetails state={data} />
-  }
+
   return (
     <Card
       sx={{
