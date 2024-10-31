@@ -10,6 +10,7 @@ import { ProductsProvider } from "../contexts/ProductsContext";
 import ProtectedRoute from "./ProtectedRoute";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import NotAuthorized from "../components/responses/NotAuthorized";
+import ProductDetails from "../components/products/ProductDetails";
 
 const PropertyWrapper = () => (
   <AuthProvider>
@@ -30,6 +31,7 @@ const Index = createBrowserRouter([
           { path: "login", element: <LoginForm /> },
           { path: "register", element: <RegisterForm /> },
           { path: "products", element: <Products /> },
+          { path: "productsDetails/:id", element: <ProductDetails/> },
           { path: "not-authorized", element: <NotAuthorized /> },
 
           // Protected Route - Only for logged-in users
