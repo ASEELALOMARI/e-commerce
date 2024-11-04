@@ -14,7 +14,7 @@ import {
   textFieldStyles,
   buttonStyles,
 } from "../../styles/FormStyle";
-import useAuth from "../../hooks/UseAuth";
+import useAuthContext from "../../hooks/UseAuthContext";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ const RegisterForm = () => {
     phoneNumber: "",
   });
   const navigate = useNavigate();
-  const { register, AuthError, AuthSuccess, isLoading } = useAuth();
+  const { register, AuthError, AuthSuccess, isLoading } = useAuthContext();
   const [errorMessage, setErrorMessage] = useState({});
 
   const handleChange = (e) => {

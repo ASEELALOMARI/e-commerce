@@ -1,10 +1,10 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-import useAuth from "../hooks/UseAuth";
+import useAuthContext from "../hooks/UseAuthContext";
 
 const AdminProtectedRoute = () => {
-  const { isLoggedIn, isAdmin } = useAuth();
+  const { isLoggedIn, isAdmin } = useAuthContext();
   return isLoggedIn && isAdmin ? <Outlet /> : <Navigate to="/not-authorized" />;
 };
 

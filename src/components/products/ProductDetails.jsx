@@ -14,22 +14,36 @@ import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-import UseProducts from "../../hooks/UseProducts";
 import NotFound from "../responses/NotFound";
+import { fetchProductById } from "../../services/ProductsService";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const { getProductById, isLoading, error } = UseProducts();
+  //const { getProductById, isLoading, error } = UseProductsContext();
   const [quantity, setQuantity] = useState(1);
-  const [product, setProducts] = useState(null);
+  const [product, setProduct] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const getProduct = async () => {
-      const GetProduct = await getProductById(id);
-      setProducts(GetProduct);
-    };
-    getProduct();
-  }, []);
+  const getProductById = async (id) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetchProductById(id);
+      setProduct(response.data);
+      
+    } catch (error) {
+      setError(error.message);
+
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(()  => {
+       getProductById(id);
+      
+  }, [id]);
 
   // Handle quantity changes
   const handleIncrease = () => setQuantity(quantity + 1);
@@ -144,7 +158,7 @@ const ProductDetails = () => {
               </Box>
             </>
           ) : (
-            <NotFound message="can't Find the product" />
+            <NotFound message={error} />
           )}
         </>
       )}

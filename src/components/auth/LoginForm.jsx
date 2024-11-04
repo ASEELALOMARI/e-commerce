@@ -8,12 +8,12 @@ import {
   textFieldStyles,
   buttonStyles,
 } from "../../styles/FormStyle";
-import useAuth from "../../hooks/UseAuth";
+import useAuthContext from "../../hooks/UseAuthContext";
 
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const { login, AuthError, AuthSuccess, isLoading} = useAuth();
+  const { login, AuthError, AuthSuccess, isLoading} = useAuthContext();
   const navigate = useNavigate();
 
   const handleChange = (e) => {

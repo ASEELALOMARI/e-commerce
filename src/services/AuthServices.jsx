@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5125/api/v1/users";
+const API_BASE_URL = `${import.meta.env.VITE_BACKEND_API_URL}/users`;
 
 // Register function
 export const registerUser = async (userData) => {

@@ -2,14 +2,14 @@ import React from "react";
 import { Box, Skeleton, Typography, Card } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
-import Product from "./product";
-import UseProducts from "../../hooks/UseProducts";
+import Product from "./Product";
 import NotFound from "../responses/NotFound";
 import PaginationBox from "./PaginationBox";
 import SortBox from "./SortBox";
+import UseProductsContext from "../../hooks/UseProductsContext";
 
 export default function Products() {
-  const { products, isLoading, error } = UseProducts();
+  const { products, isLoading, error } = UseProductsContext();
   // Number of skeletons to show while loading
   const skeletonCount = 8;
 

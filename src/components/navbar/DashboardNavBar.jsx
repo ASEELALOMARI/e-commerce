@@ -13,11 +13,11 @@ import { Notifications, AccountCircle, Logout } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 import reactLogo from "../../assets/react.svg";
-import useAuth from "../../hooks/UseAuth";
+import useAuthContext from "../../hooks/UseAuthContext";
 
 const DashboardNavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { logout } = useAuth();
+  const { logout } = useAuthContext();
   const storedUser = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {

@@ -8,11 +8,11 @@ import {
   Logout,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import useAuth from "../../hooks/UseAuth";
+import useAuthContext from "../../hooks/UseAuthContext";
 
 function UserNavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const { isAdmin, isLoggedIn, logout } = useAuth();
+  const { isAdmin, isLoggedIn, logout } = useAuthContext();
   const storedUser = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = () => {

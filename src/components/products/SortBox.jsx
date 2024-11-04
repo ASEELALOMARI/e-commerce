@@ -2,16 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Box, IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
 import SortIcon from "@mui/icons-material/Sort";
 
-import UseProducts from "../../hooks/UseProducts";
+import UseProductsContext from "../../hooks/UseProductsContext";
 
 const SortBox = () => {
-  const [sortValue, setSortValue] = useState("name_asc");
-  const { getFilteredData } = UseProducts();
+  const { sortValue, setSortValue } = UseProductsContext();
   const [anchorEl, setAnchorEl] = useState(null);
-
-  useEffect(() => {
-    getFilteredData(null, 1, 10, sortValue);
-  }, [sortValue]);
 
   // Open and close menu handlers
   const handleClick = (event) => setAnchorEl(event.currentTarget);

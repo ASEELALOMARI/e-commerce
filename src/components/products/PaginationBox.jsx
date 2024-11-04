@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Box, Pagination } from "@mui/material";
 
-import UseProducts from "../../hooks/UseProducts";
+import UseProductsContext from "../../hooks/UseProductsContext";
 
 function PaginationBox() {
-  const [page, setPage] = useState(1);
-  const { getFilteredData, totalItems } = UseProducts();
+  const { pageValue, setPageValue, totalItems, pageSizeValue } = UseProductsContext();
 
-  const totalPageNumbers = Math.ceil(totalItems/8);
-
-  useEffect(() => {
-    getFilteredData('',page);
-  }, [page]);
+  const totalPageNumbers = Math.ceil(totalItems/pageSizeValue);
 
   const handleChange = (event, newPage) => {
-    setPage(newPage);
+    setPageValue(newPage);
   };
 
   return (
@@ -26,7 +21,7 @@ function PaginationBox() {
         color="primary"
         defaultPage={1}
         siblingCount={0}
-        page={page}
+        page={pageValue}
         onChange={handleChange}
       />
     </Box>
