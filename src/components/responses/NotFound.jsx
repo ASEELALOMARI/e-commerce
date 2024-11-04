@@ -18,7 +18,7 @@ const NotFound = ({ message = "No data found." }) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height: "100vh",
+        height: "80vh",
         textAlign: "center",
         padding: 3,
       }}

@@ -5,6 +5,8 @@ import Grid from "@mui/material/Grid2";
 import Product from "./product";
 import UseProducts from "../../hooks/UseProducts";
 import NotFound from "../responses/NotFound";
+import PaginationBox from "./PaginationBox";
+import SortBox from "./SortBox";
 
 export default function Products() {
   const { products, isLoading, error } = UseProducts();
@@ -23,6 +25,10 @@ export default function Products() {
       {/* Title */}
       <Box sx={{ m: 4 }}>
         <Typography variant="h2">Products</Typography>
+      </Box>
+      {/* Sort */}
+      <Box sx={{ m: 2, position: "relative"}}>
+        <SortBox/>
       </Box>
       {/* List */}
       <Box sx={{ width: "100%" }}>
@@ -48,16 +54,28 @@ export default function Products() {
             ))
           ) : (
             <>
-              {products && products.length > 0 ? (
-                <>{productsList}</>
-              ) : (
-                <div style={{ width: "100%" }}>
+              {/* Display NotFound component if there is an error */}
+              {error ? (
+                <Box sx={{ width:"100%" }}>
                   <NotFound message={error} />
-                </div>
+                </Box>
+              ) : (
+                <>
+                  {/* Display the products list if products are available */}
+                  {products && products.length > 0 ? (
+                    <>{productsList}</>
+                  ) : (
+                    // If no products and no error, display a NotFound message for empty search results
+                    <Box sx={{ width:"100%" }}>
+                      <NotFound message="No products found." />
+                    </Box>
+                  )}
+                </>
               )}
             </>
           )}
         </Grid>
+        <PaginationBox />
       </Box>
     </>
   );

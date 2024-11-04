@@ -7,9 +7,20 @@ export const getAllProducts = async () => {
   return response.data;
 };
 
-export const getFilteredProduct= async (searchBy,page, pageSize) => {
+export const getFilteredProduct = async (
+  searchBy = "",
+  page = 1,
+  pageSize = 8,
+  sortBy = ""
+) => {
+  const params = new URLSearchParams();
 
-  const response = await axios.get(`${API_BASE_URL}?SearchBy=${searchBy}&`);
+  if (searchBy) params.append("SearchBy", searchBy);
+  if (page) params.append("Page", page);
+  if (pageSize) params.append("PageSize", pageSize);
+  if (sortBy) params.append("Sort", sortBy);
+
+  const response = await axios.get(`${API_BASE_URL}?${params.toString()}`);
   return response.data;
 };
 

@@ -22,6 +22,9 @@ const NavBar = () => {
           <Button color="inherit" href="/" sx={{ color: "black" }}>
             Home
           </Button>
+          <Button color="inherit" href="/products" sx={{ color: "black" }}>
+            Products
+          </Button>
           <Button color="inherit" href="/new" sx={{ color: "black" }}>
             New
           </Button>

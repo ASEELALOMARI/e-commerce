@@ -13,15 +13,18 @@ export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     const fetchProducts = async () => {
       setIsLoading(true);
+      setError(null);
       try {
         const response = await getAllProducts();
         console.log(response);
         const data = response.data.items.$values;
         setProducts(data);
+        setTotalItems(response.data.totalItems);
         console.log(data);
       } catch (error) {
         setError(error.message);
@@ -35,6 +38,7 @@ export const ProductsProvider = ({ children }) => {
 
   const getProductById = async (id) => {
     setIsLoading(true);
+    setError(null);
     try {
       const response = await fetchProductById(id);
       return response.data;
@@ -47,12 +51,14 @@ export const ProductsProvider = ({ children }) => {
     }
   };
 
-  const getFilteredData = async (search, page, pageSize) => {
+  const getFilteredData = async (search, page, pageSize, SortBy) => {
     setIsLoading(true);
+    setError(null);
     try {
-      const response = await getFilteredProduct(search,page, pageSize);
+      const response = await getFilteredProduct(search,page, pageSize, SortBy);
       const FiletedData = response.data.items.$values;
       setProducts(FiletedData);
+      setTotalItems(response.data.totalItems);
       
     } catch (error) {
       setError(error.message);
@@ -63,7 +69,7 @@ export const ProductsProvider = ({ children }) => {
   };
 
   return (
-    <ProductsContext.Provider value={{ products, isLoading, error, getProductById, getFilteredData}}>
+    <ProductsContext.Provider value={{ products, isLoading, error,totalItems, getProductById, getFilteredData}}>
       {children}
     </ProductsContext.Provider>
   );
