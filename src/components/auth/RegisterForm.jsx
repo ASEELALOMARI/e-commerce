@@ -7,7 +7,6 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 import {
   formContainerStyles,
@@ -15,6 +14,12 @@ import {
   buttonStyles,
 } from "../../styles/FormStyle";
 import useAuthContext from "../../hooks/UseAuthContext";
+import { registerUser } from "../../services/AuthServices";
+import {
+  showErrorMessage,
+  showSuccessMessage,
+} from "../../utility/ToastMessages";
+import AuthLayout from "../layouts/AuthLayout";
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -25,8 +30,27 @@ const RegisterForm = () => {
     phoneNumber: "",
   });
   const navigate = useNavigate();
-  const { register, AuthError, AuthSuccess, isLoading } = useAuthContext();
+
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
+
+  // Register function
+  const register = async (userData) => {
+    setIsLoading(true);
+    try {
+      const response = await registerUser(userData);
+      if (response.statusCode == "201") {
+        const successMessage = response.message;
+        showSuccessMessage(successMessage);
+        navigate("../login");
+      }
+    } catch (err) {
+      const errorMessage = err.response.data.message;
+      showErrorMessage(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,89 +79,89 @@ const RegisterForm = () => {
         address: formData.address,
         phoneNumber: formData.phoneNumber,
       };
-      const registered = await register(registerData);
-      if (registered) {
-        toast.success(`User registered successfully!${AuthSuccess}`);
-        navigate("../login");
-      } else {
-        toast.error(`Invalid credentials.${AuthError} Please try again.`);
-      }
+      await register(registerData);
     }
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={formContainerStyles}>
-      <Typography variant="h5" mb={2}>
-        Register
-      </Typography>
+    <AuthLayout
+      image={
+        "https://res.cloudinary.com/dligtpmdv/image/upload/v1730749737/Group_of_customers_shopping_in_online_store_and_huge_tablet_ynkuum.jpg"
+      }
+      title={"Join Us Today!"}
+      message={
+        "Create an account to enjoy exclusive benefits and a seamless shopping experience."
+      }
+    >
+      <Box component="form" onSubmit={handleSubmit}>
+        <TextField
+          label="Username"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          required
+          sx={textFieldStyles}
+        />
+        <TextField
+          label="Email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          required
+          type="email"
+          sx={textFieldStyles}
+        />
+        <TextField
+          label="Password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          required
+          type="password"
+          sx={textFieldStyles}
+        />
+        <TextField
+          label="Address"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          type="text"
+          sx={textFieldStyles}
+        />
+        <TextField
+          label="Phone Number"
+          name="phoneNumber"
+          value={formData.phoneNumber}
+          onChange={handleChange}
+          variant="outlined"
+          fullWidth
+          type="phone"
+          sx={textFieldStyles}
+        />
 
-      <TextField
-        label="Username"
-        name="username"
-        value={formData.username}
-        onChange={handleChange}
-        variant="outlined"
-        fullWidth
-        required
-        sx={textFieldStyles}
-      />
-      <TextField
-        label="Email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        variant="outlined"
-        fullWidth
-        required
-        type="email"
-        sx={textFieldStyles}
-      />
-      <TextField
-        label="Password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        variant="outlined"
-        fullWidth
-        required
-        type="password"
-        sx={textFieldStyles}
-      />
-      <TextField
-        label="Address"
-        name="address"
-        value={formData.address}
-        onChange={handleChange}
-        variant="outlined"
-        fullWidth
-        type="text"
-        sx={textFieldStyles}
-      />
-      <TextField
-        label="Phone Number"
-        name="phoneNumber"
-        value={formData.phoneNumber}
-        onChange={handleChange}
-        variant="outlined"
-        fullWidth
-        type="phone"
-        sx={textFieldStyles}
-      />
-
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        sx={buttonStyles}
-      >
-        Register
-      </Button>
-      {isLoading && (
-        <Box m={2}>
-          <CircularProgress color="primary" />
-        </Box>
-      )}
-    </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={buttonStyles}
+        >
+          Register
+        </Button>
+        {isLoading && (
+          <Box m={2}>
+            <CircularProgress color="primary" />
+          </Box>
+        )}
+      </Box>
+    </AuthLayout>
   );
 };
 

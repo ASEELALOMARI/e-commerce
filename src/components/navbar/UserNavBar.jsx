@@ -57,7 +57,7 @@ function UserNavBar() {
       >
         {/* Conditionally show Register and Log In only if the user is not logged in */}
         {!isLoggedIn && (
-          <>
+          <div>
             <MenuItem onClick={handleMenuClose} component={Link} to="/register">
               <PersonAdd fontSize="small" sx={{ marginRight: 1 }} />
               Register
@@ -66,7 +66,7 @@ function UserNavBar() {
               <Login fontSize="small" sx={{ marginRight: 1 }} />
               Log In
             </MenuItem>
-          </>
+          </div>
         )}
 
         {/* Show Admin Dashboard option if the user is an admin */}

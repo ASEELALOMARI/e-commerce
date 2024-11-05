@@ -11,6 +11,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import NotAuthorized from "../components/responses/NotAuthorized";
 import ProductDetails from "../components/products/ProductDetails";
+import AuthLayout from "../components/layouts/AuthLayout";
 
 const PropertyWrapper = () => (
   <AuthProvider>
@@ -23,15 +24,19 @@ const Index = createBrowserRouter([
   {
     element: <PropertyWrapper />,
     children: [
+      // Auth Route
+
+      { path: "login", element: <LoginForm /> },
+      { path: "register", element: <RegisterForm /> },
+
       {
         path: "/",
         element: <StoreLayout />,
         children: [
           // Public Routes
-          { path: "login", element: <LoginForm /> },
-          { path: "register", element: <RegisterForm /> },
+
           { path: "products", element: <Products /> },
-          { path: "productsDetails/:id", element: <ProductDetails/> },
+          { path: "productsDetails/:id", element: <ProductDetails /> },
           { path: "not-authorized", element: <NotAuthorized /> },
 
           // Protected Route - Only for logged-in users
@@ -56,7 +61,7 @@ const Index = createBrowserRouter([
         element: <AdminProtectedRoute />,
         children: [
           {
-            path: "admin",
+            path: "dashboard",
             element: <DashboardLayout />,
             children: [
               {
