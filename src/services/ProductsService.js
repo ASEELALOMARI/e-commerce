@@ -23,3 +23,8 @@ export const fetchProductById = async (productId) => {
   const response = await axios.get(`${API_BASE_URL}/${productId}`);
   return response.data;
 };
+
+export const getProductComments = async (productId) => {
+  const response = await axios.get(`${import.meta.env.VITE_BACKEND_API_URL}/reviews/product/${productId}`);
+  return response.data;
+};

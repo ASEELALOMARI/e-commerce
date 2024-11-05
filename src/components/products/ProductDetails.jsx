@@ -16,6 +16,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 
 import NotFound from "../responses/NotFound";
 import { fetchProductById } from "../../services/ProductsService";
+import ProductComments from "./ProductComments";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -31,18 +32,15 @@ const ProductDetails = () => {
     try {
       const response = await fetchProductById(id);
       setProduct(response.data);
-      
     } catch (error) {
       setError(error.message);
-
     } finally {
       setIsLoading(false);
     }
   };
 
-  useEffect(()  => {
-       getProductById(id);
-      
+  useEffect(() => {
+    getProductById(id);
   }, [id]);
 
   // Handle quantity changes
@@ -62,7 +60,7 @@ const ProductDetails = () => {
               <Box sx={{ padding: 4 }}>
                 <Grid container spacing={4}>
                   {/* Left side - Product Image */}
-                  <Grid item xs={12} md={6}>
+                  <Grid item="true" xs={12} md={6}>
                     <Box
                       component="img"
                       src={product.imageURL}
@@ -72,7 +70,7 @@ const ProductDetails = () => {
                   </Grid>
 
                   {/* Right side - Product Details */}
-                  <Grid item xs={12} md={6}>
+                  <Grid item="true" xs={12} md={6}>
                     {/* Product Title */}
                     <Typography variant="h4" gutterBottom>
                       {product.name}
@@ -96,9 +94,9 @@ const ProductDetails = () => {
                       alignItems="center"
                       sx={{ marginBottom: 2 }}
                     >
-                      <Rating value={3.5} precision={0.5} readOnly />
+                      <Rating value={product.rating} precision={0.5} readOnly />
                       <Typography variant="body2" sx={{ marginLeft: 1 }}>
-                        {3.5} / 5
+                        {product.rating} / 5
                       </Typography>
                     </Box>
 
@@ -155,6 +153,9 @@ const ProductDetails = () => {
                     </Box>
                   </Grid>
                 </Grid>
+                <Box sx={{ padding: 4 }}>
+                  <ProductComments productId={product.productId} />
+                </Box>
               </Box>
             </>
           ) : (

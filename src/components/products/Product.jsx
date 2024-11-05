@@ -7,13 +7,13 @@ import {
   CardActions,
   IconButton,
   Typography,
+  Box,
+  Rating,
 } from "@mui/material";
 import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-
 function Product({ data }) {
-
   return (
     <Card
       sx={{
@@ -33,6 +33,9 @@ function Product({ data }) {
 
       {/* Product Name and Price */}
       <CardContent>
+        <Box>
+          <Rating value={data.rating} precision={0.5} readOnly />
+        </Box>
         <Typography
           variant="h6"
           component={Link}
