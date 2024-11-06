@@ -60,10 +60,11 @@ const Index = createBrowserRouter([
 
       // Admin Protected Route - Only for admin users
       {
+        path:"admin",
         element: <AdminProtectedRoute />,
         children: [
           {
-            path: "dashboard",
+            path: "Dashboard",
             element: <DashboardLayout />,
             children: [
               {
@@ -71,8 +72,20 @@ const Index = createBrowserRouter([
                 element: <div>Manage Products</div>,
               },
               {
+                path: "manage-categories",
+                element: <div>manage categories</div>,
+              },
+              {
                 path: "manage-users",
                 element: <div>mange users</div>,
+              },
+              {
+                path: "manage-orders",
+                element: <div>manage orders</div>,
+              },
+              {
+                path: "settings",
+                element: <div>settings</div>,
               },
             ],
           },

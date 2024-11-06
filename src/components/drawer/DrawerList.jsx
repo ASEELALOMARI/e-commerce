@@ -15,32 +15,32 @@ const DrawerList = ({ open }) => {
     <List>
       {/* Drawer Sections */}
       <CustomNavItem
-        to="/manage-products"
+        to="manage-products"
         icon={MdInventory}
         label="Manage Products"
         open={open}
       />
       <CustomNavItem
-        to="/manage-categories"
+        to="manage-categories"
         icon={MdOutlineCategory}
         label="Manage Categories"
         open={open}
       />
       <CustomNavItem
-        to="/manage-users"
+        to="manage-users"
         icon={AiOutlineUsergroupAdd}
         label="Manage Users"
         open={open}
       />
       <CustomNavItem
-        to="/manage-orders"
+        to="manage-orders"
         icon={MdShoppingCart}
         label="Manage Orders"
         open={open}
       />
       <Divider sx={{ marginY: 2 }} />
       <CustomNavItem
-        to="/settings"
+        to="settings"
         icon={MdSettings}
         label="Settings"
         open={open}

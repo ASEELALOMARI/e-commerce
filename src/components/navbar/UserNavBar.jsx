@@ -71,7 +71,7 @@ function UserNavBar() {
 
         {/* Show Admin Dashboard option if the user is an admin */}
         {isAdmin && (
-          <MenuItem onClick={handleMenuClose} component={Link} to="/admin">
+          <MenuItem onClick={handleMenuClose} component={Link} to="/admin/Dashboard">
             <AdminPanelSettings fontSize="small" sx={{ marginRight: 1 }} />
             Admin Dashboard
           </MenuItem>

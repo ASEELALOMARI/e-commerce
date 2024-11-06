@@ -12,7 +12,7 @@ const CustomNavItem = ({ to, icon: Icon, label, open }) => (
     style={{ textDecoration: "none" }}
   >
     <Box className={styles.box}>
-      <ListItem button>
+      <ListItem button='true'>
         <ListItemIcon>
           <Icon className={styles.list__icon} />
         </ListItemIcon>
