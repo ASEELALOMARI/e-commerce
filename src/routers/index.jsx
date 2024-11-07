@@ -13,6 +13,9 @@ import NotAuthorized from "../components/responses/NotAuthorized";
 import ProductDetails from "../components/products/ProductDetails";
 import AuthLayout from "../components/layouts/AuthLayout";
 import Example from "../components/form/example";
+import ManageProduct from "../components/Admin/ManegeProdect/ManageProduct";
+import CreateNewProduct from "../components/Admin/ManegeProdect/CreateNewProduct";
+
 
 const PropertyWrapper = () => (
   <AuthProvider>
@@ -69,7 +72,11 @@ const Index = createBrowserRouter([
             children: [
               {
                 path: "manage-products",
-                element: <div>Manage Products</div>,
+                element: <ManageProduct/>,
+              },
+              {
+                path: "newProduct",
+                element: <CreateNewProduct/>,
               },
               {
                 path: "manage-categories",

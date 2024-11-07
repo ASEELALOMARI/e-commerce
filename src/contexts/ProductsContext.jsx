@@ -44,6 +44,27 @@ export const ProductsProvider = ({ children }) => {
     fetchProducts();
   }, [searchValue, pageValue, sortValue]);
 
+  //Add new products to the current product list.
+  const addProduct = (newProduct) => {
+    setProducts((prevProducts) => [...prevProducts, newProduct]);
+  };
+
+  //Update a product in the current product list.
+  const editProduct = (updatedProduct) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((p) =>
+        p.productId === updatedProduct.productId ? { ...p, ...updatedProduct } : p
+      )
+    );
+  };
+
+  //Delete a product from the current product list.
+  const deleteProductById = (id) => {
+    setProducts((prevProducts) =>
+      prevProducts.filter((p) => p.productId !== id)
+    );
+  };
+
   return (
     <ProductsContext.Provider
       value={{
@@ -58,6 +79,9 @@ export const ProductsProvider = ({ children }) => {
         sortValue,
         setSortValue,
         pageSizeValue,
+        addProduct,
+        editProduct,
+        deleteProductById,
       }}
     >
       {children}

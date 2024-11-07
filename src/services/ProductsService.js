@@ -1,4 +1,5 @@
 import axios from "axios";
+import useAuthContext from "../hooks/UseAuthContext";
 
 const API_BASE_URL = `${import.meta.env.VITE_BACKEND_API_URL}/products`;
 
@@ -24,7 +25,28 @@ export const fetchProductById = async (productId) => {
   return response.data;
 };
 
+export const createNewProduct = async (productData, token) => {
+  const response = await axios.post(`${API_BASE_URL}`, productData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
+  return response.data;
+};
+
+export const DeleteProduct = async (id,token)=>{
+  const response = await axios.delete(`${API_BASE_URL}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response;
+}
+
 export const getProductComments = async (productId) => {
-  const response = await axios.get(`${import.meta.env.VITE_BACKEND_API_URL}/reviews/product/${productId}`);
+  const response = await axios.get(
+    `${import.meta.env.VITE_BACKEND_API_URL}/reviews/product/${productId}`
+  );
   return response.data;
 };
