@@ -6,10 +6,16 @@ export const AuthContext = createContext();
 
 // AuthProvider component to wrap your app
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
+  const storedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const storedIsAdmin = localStorage.getItem("isAdmin") === "true";
+  
+  const [user, setUser] = useState(storedUser);
+  const [token, setToken] = useState(storedToken);
+  const [isLoggedIn, setIsLoggedIn] = useState(storedIsLoggedIn);
+  const [isAdmin, setIsAdmin] = useState(storedIsAdmin);
 
   // Load user data and token from localStorage on mount
   useEffect(() => {

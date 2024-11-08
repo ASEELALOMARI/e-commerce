@@ -69,7 +69,8 @@ function ManageProduct() {
   ];
 
   const handleEdit = (productId) => {
-    console.log(`Edit product with ID: ${productId}`);
+    navigate(`../editProduct/${productId}`);
+
   };
 
 // Function to handle dialog opening
@@ -86,15 +87,14 @@ const handleDelete = async () => {
   try {
     const response = await DeleteProduct(selectedProduct, token);
     if (response.status === 204) {
-      console.log("The deleted ID will be",selectedProduct);
       deleteProductById(selectedProduct);
       showSuccessMessage("Product deleted successfully");
     } else {
       showErrorMessage("Failed to delete product");
     }
   } catch (error) {
-    console.error(error);
     showErrorMessage("Error occurred while deleting the product");
+
   } finally {
     handleCloseDialog(); 
   }
@@ -106,7 +106,6 @@ const handleDelete = async () => {
   };
 
   const handleAddProduct = () => {
-    console.log("Add new product");
     navigate('../newProduct');
   };
   return (

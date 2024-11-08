@@ -89,6 +89,7 @@ function CreateNewProduct() {
         categoryId: formData.categoryId,
         imageURL: ImageURL,
       };
+      
       const response = await createNewProduct(requestData, token);
       addProduct(response.data);
       showSuccessMessage(response.message);
@@ -96,7 +97,7 @@ function CreateNewProduct() {
 
     } catch (error) {
       showErrorMessage(error.response.data.message);
-      
+
     } finally {
       setIsLoading(false);
     }
