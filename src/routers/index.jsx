@@ -15,13 +15,19 @@ import Example from "../components/form/example";
 import ManageProduct from "../components/admin/manegeProduct/ManegeProduct";
 import CreateNewProduct from "../components/admin/manegeProduct/CreateNewProduct";
 import UpdateProduct from "../components/admin/manegeProduct/UpdateProduct";
+import ManegeCategories from "../components/admin/manegeCategories/ManegeCategories";
+import { CategoriesProvider } from "../contexts/CategoriesContext";
+import CreateNewCategory from "../components/admin/manegeCategories/CreateNewCategory";
+import UpdateCategory from "../components/admin/manegeCategories/UpdateCategory";
 
 
 
 const PropertyWrapper = () => (
   <AuthProvider>
     <ProductsProvider>
+      <CategoriesProvider>
       <Outlet />
+      </CategoriesProvider>
     </ProductsProvider>
   </AuthProvider>
 );
@@ -85,7 +91,15 @@ const Index = createBrowserRouter([
               },
               {
                 path: "manage-categories",
-                element: <div>manage categories</div>,
+                element: <ManegeCategories/>,
+              },
+              {
+                path: "newCategory",
+                element: <CreateNewCategory/>,
+              },
+              {
+                path: "editCategory/:id",
+                element: <UpdateCategory/>
               },
               {
                 path: "manage-users",

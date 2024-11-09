@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import CustomForm from "../../form/CustomForm";
 import { Box, CircularProgress, Paper } from "@mui/material";
 import { uploadImageToCloudinary } from "../../../utility/UploadImage";
+import { useNavigate, useParams } from "react-router-dom";
+import { Update } from "@mui/icons-material";
+
 import {
-  createNewProduct,
   fetchProductById,
   updateProduct,
 } from "../../../services/ProductsService";
@@ -12,71 +14,66 @@ import {
   showErrorMessage,
   showSuccessMessage,
 } from "../../../utility/ToastMessages";
-import { useNavigate, useParams } from "react-router-dom";
 import UseProductsContext from "../../../hooks/UseProductsContext";
-import { Update } from "@mui/icons-material";
 import UpdatedFrom from "../../form/UpdatedForm";
 import { urlToFile } from "../../../utility/imageURLtoFile";
-
-const fields = [
-  {
-    label: "Product Name",
-    type: "text",
-    id: "Product-name",
-    name: "name",
-    placeholder: "Product Name",
-    required: true,
-    minLength: 3,
-    maxLength: 50,
-  },
-  {
-    label: "Price",
-    type: "number",
-    id: "Product-price",
-    name: "price",
-    placeholder: "Price",
-    required: true,
-    min: 1,
-  },
-  {
-    label: "Description",
-    type: "text",
-    id: "Product-Description",
-    name: "description",
-    placeholder: "Description",
-    required: true,
-    minLength: 10,
-    maxLength: 500,
-  },
-  {
-    label: "Stock Quantity",
-    type: "number",
-    id: "Stock-Quantity",
-    name: "stockQuantity",
-    placeholder: "Quantity",
-    required: true,
-    min: 1,
-  },
-  {
-    label: "Category",
-    type: "select",
-    id: "Category",
-    name: "categoryID",
-    options: [
-      { label: "Gifts", value: "f6db1cc9-e420-47a8-a4b0-7fe811f735ea" },
-      { label: "Apartment", value: "apartment" },
-    ],
-    required: true,
-  },
-  {
-    label: "Image",
-    type: "file",
-    id: "Product-image",
-    name: "image",
-  },
-];
+import { getCategoriesList } from "../../../services/CategoriesServices";
 
 function UpdateProduct() {
+  const [fields, setFields] = useState([
+    {
+      label: "Product Name",
+      type: "text",
+      id: "Product-name",
+      name: "name",
+      placeholder: "Product Name",
+      required: true,
+      minLength: 3,
+      maxLength: 50,
+    },
+    {
+      label: "Price",
+      type: "number",
+      id: "Product-price",
+      name: "price",
+      placeholder: "Price",
+      required: true,
+      min: 1,
+    },
+    {
+      label: "Description",
+      type: "text",
+      id: "Product-Description",
+      name: "description",
+      placeholder: "Description",
+      required: true,
+      minLength: 10,
+      maxLength: 500,
+    },
+    {
+      label: "Stock Quantity",
+      type: "number",
+      id: "Stock-Quantity",
+      name: "stockQuantity",
+      placeholder: "Quantity",
+      required: true,
+      min: 1,
+    },
+    {
+      label: "Category",
+      type: "select",
+      id: "Category",
+      name: "categoryID",
+      options: [],
+      required: true,
+    },
+    {
+      label: "Image",
+      type: "file",
+      id: "Product-image",
+      name: "image",
+    },
+  ]);
   const [isLoading, setIsLoading] = useState();
   const [product, setProduct] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -84,6 +81,35 @@ function UpdateProduct() {
   const { token } = useAuthContext();
   const navigate = useNavigate();
   const { id } = useParams();
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setIsLoading(true);
+      try {
+        const response = await getCategoriesList();
+        const categories = response.data.items.$values;
+
+        // Map categories to desired format for the select input
+        const options = categories.map((category) => ({
+          label: category.categoryName,
+          value: category.id,
+        }));
+
+        // Update fields array with the fetched options and set the selected category for `categoryID`
+        setFields((prevFields) =>
+          prevFields.map((field) =>
+            field.name === "categoryID" ? { ...field, options } : field
+          )
+        );
+      } catch (error) {
+        showErrorMessage("Failed to fetch categories");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     const fetchProduct = async () => {

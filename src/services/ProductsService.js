@@ -1,5 +1,4 @@
 import axios from "axios";
-import useAuthContext from "../hooks/UseAuthContext";
 
 const API_BASE_URL = `${import.meta.env.VITE_BACKEND_API_URL}/products`;
 

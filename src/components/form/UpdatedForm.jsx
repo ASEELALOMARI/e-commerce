@@ -13,7 +13,7 @@ function UpdatedFrom({ formTitle = "Form", fields, onSubmit, initialData = {} })
   // Update formData with initialData whenever initialData changes
   useEffect(() => {
     setFormData(initialData);
-    setImageURL(initialData && initialData.imageURL);
+    setImageURL(initialData && initialData.imageURL || null);
   }, []);
 
   const handleChange = (event) => {
