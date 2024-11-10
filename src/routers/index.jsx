@@ -21,16 +21,20 @@ import CreateNewCategory from "../components/admin/manegeCategories/CreateNewCat
 import UpdateCategory from "../components/admin/manegeCategories/UpdateCategory";
 import { CartProvider } from "../contexts/CartContext";
 import ShoppingCart from "../components/cart/ShoppingCart";
+import { UsersProvider } from "../contexts/UsersContext";
+import ManageUsers from "../components/admin/manegeUsers/ManegeUsers";
 
 const PropertyWrapper = () => (
   <AuthProvider>
-    <ProductsProvider>
-      <CategoriesProvider>
-        <CartProvider>
-          <Outlet />
-        </CartProvider>
-      </CategoriesProvider>
-    </ProductsProvider>
+    <UsersProvider>
+      <ProductsProvider>
+        <CategoriesProvider>
+          <CartProvider>
+            <Outlet />
+          </CartProvider>
+        </CategoriesProvider>
+      </ProductsProvider>
+    </UsersProvider>
   </AuthProvider>
 );
 const Index = createBrowserRouter([
@@ -59,7 +63,7 @@ const Index = createBrowserRouter([
             children: [
               {
                 path: "Shopping-cart",
-                element: <ShoppingCart/>
+                element: <ShoppingCart />,
               },
               {
                 path: "user-profile",
@@ -109,7 +113,7 @@ const Index = createBrowserRouter([
               },
               {
                 path: "manage-users",
-                element: <div>mange users</div>,
+                element: <ManageUsers />,
               },
               {
                 path: "manage-orders",
