@@ -3,20 +3,30 @@ import { Box, TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
 
 import UseProductsContext from "../../hooks/UseProductsContext";
+import useDebounce from "../../utility/useDebounce";
 
 const SearchBox = () => {
-  const { searchValue, setSearchValue } = UseProductsContext();
+  const [inputValue, setInputValue] = useState("");
+  const { setSearchValue } = UseProductsContext();
+  const debouncedValue = useDebounce(inputValue, 500);
+
+  useEffect(() => {
+    if (debouncedValue) {
+      setSearchValue(debouncedValue);
+    }
+  }, [debouncedValue]);
 
   const handleSearch = async (event) => {
     const { value } = event.target;
-    setSearchValue(value);    
-  }
+    setInputValue(value);
+  };
 
   return (
     <>
       <TextField
         variant="outlined"
         placeholder="Search..."
+        value={inputValue}
         onChange={handleSearch}
         size="small"
         InputProps={{

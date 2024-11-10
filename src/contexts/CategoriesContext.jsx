@@ -1,4 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
+
 import { getCategoriesList } from "../services/CategoriesServices";
 
 export const CategoriesContext = createContext();
@@ -10,21 +12,30 @@ export const CategoriesProvider = ({ children }) => {
   const [sortValue, setSortValue] = useState("name_asc");
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchCategories = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await getCategoriesList(sortValue);
+        const response = await getCategoriesList(sortValue, controller.signal);
         const data = response.data.items.$values;
         setCategories(data);
       } catch (error) {
-        setError(error.message);
+        if (axios.isCancel(error)) {
+          console.log("Fetch canceled");
+        } else {
+          setError(error.message);
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchCategories();
+    // Clean up function to cancel the request
+    return () => controller.abort();
+
   }, [sortValue]);
 
   // Add a new category to the current category list.

@@ -4,11 +4,14 @@ const API_BASE_URL = `${import.meta.env.VITE_BACKEND_API_URL}/category`;
 
 // Get all categories
 
-export const getCategoriesList = async (sortBy = "") => {
+export const getCategoriesList = async (sortBy = "", signal) => {
   const params = new URLSearchParams();
   if (sortBy) params.append("Sort", sortBy);
 
-  const response = await axios.get(`${API_BASE_URL}/list?${params.toString()}`);
+  const response = await axios.get(
+    `${API_BASE_URL}/list?${params.toString()}`,
+    { signal }
+  );
   return response.data;
 };
 
@@ -28,12 +31,12 @@ export const createNewCategory = async (newCategory, token) => {
 };
 
 export const updateCategory = async (id, updatedCategory, token) => {
-    const response = await axios.put(`${API_BASE_URL}/${id}`, updatedCategory, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+  const response = await axios.put(`${API_BASE_URL}/${id}`, updatedCategory, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
   return response.data;
 };
 

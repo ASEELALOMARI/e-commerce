@@ -6,7 +6,8 @@ export const getFilteredProduct = async (
   searchBy = "",
   page = 1,
   pageSize = 8,
-  sortBy = ""
+  sortBy = "",
+  signal
 ) => {
   const params = new URLSearchParams();
 
@@ -15,7 +16,9 @@ export const getFilteredProduct = async (
   if (pageSize) params.append("PageSize", pageSize);
   if (sortBy) params.append("Sort", sortBy);
 
-  const response = await axios.get(`${API_BASE_URL}?${params.toString()}`);
+  const response = await axios.get(`${API_BASE_URL}?${params.toString()}`, {
+    signal,
+  });
   return response.data;
 };
 
@@ -35,23 +38,27 @@ export const createNewProduct = async (productData, token) => {
 };
 
 export const updateProduct = async (productId, productData, token) => {
-  const response = await axios.put(`${API_BASE_URL}/${productId}`, productData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await axios.put(
+    `${API_BASE_URL}/${productId}`,
+    productData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
   return response.data;
 };
 
-export const DeleteProduct = async (id,token)=>{
+export const DeleteProduct = async (id, token) => {
   const response = await axios.delete(`${API_BASE_URL}/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
   return response;
-}
+};
 
 export const getProductComments = async (productId) => {
   const response = await axios.get(

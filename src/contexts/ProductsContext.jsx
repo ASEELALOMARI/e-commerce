@@ -6,6 +6,8 @@ import React, {
   Children,
 } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+
 import { getFilteredProduct } from "../services/ProductsService";
 
 export const ProductsContext = createContext();
@@ -21,6 +23,8 @@ export const ProductsProvider = ({ children }) => {
   const [sortValue, setSortValue] = useState("name_asc");
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchProducts = async () => {
       setIsLoading(true);
       setError(null);
@@ -29,19 +33,26 @@ export const ProductsProvider = ({ children }) => {
           searchValue,
           pageValue,
           pageSizeValue,
-          sortValue
+          sortValue,
+          controller.signal,
         );
         const data = response.data.items.$values;
         setProducts(data);
         setTotalItems(response.data.totalItems);
       } catch (error) {
-        setError(error.message);
+        if (axios.isCancel(error)) {
+          console.log("Fetch canceled");
+        } else {
+          setError(error.message);
+        }
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchProducts();
+    // Clean up function to cancel the request
+    return () => controller.abort();
   }, [searchValue, pageValue, sortValue]);
 
   //Add new products to the current product list.
