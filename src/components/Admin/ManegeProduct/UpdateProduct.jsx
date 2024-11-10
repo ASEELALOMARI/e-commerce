@@ -29,7 +29,7 @@ function UpdateProduct() {
       placeholder: "Product Name",
       required: true,
       minLength: 3,
-      maxLength: 50,
+      maxLength: 25,
     },
     {
       label: "Price",
