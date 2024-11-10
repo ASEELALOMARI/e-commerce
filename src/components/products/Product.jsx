@@ -12,8 +12,16 @@ import {
 } from "@mui/material";
 import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import UseCartContext from "../../hooks/UseCartContext";
+import e from "cors";
 
 function Product({ data }) {
+  const {addToCart} = UseCartContext();
+
+  const handelAddItemToCart = ()=>{
+    addToCart(data);
+    console.log("Added to cart: ", data);
+  }
   return (
     <Card
       sx={{
@@ -53,7 +61,7 @@ function Product({ data }) {
 
       {/* Actions: Add to Cart and Wishlist */}
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to Cart" color="primary">
+        <IconButton aria-label="Add to Cart" color="primary" onClick={handelAddItemToCart}>
           <AddShoppingCart />
         </IconButton>
         <IconButton aria-label="Add to Wishlist" color="secondary">

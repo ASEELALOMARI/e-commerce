@@ -19,14 +19,16 @@ import ManegeCategories from "../components/admin/manegeCategories/ManegeCategor
 import { CategoriesProvider } from "../contexts/CategoriesContext";
 import CreateNewCategory from "../components/admin/manegeCategories/CreateNewCategory";
 import UpdateCategory from "../components/admin/manegeCategories/UpdateCategory";
-
-
+import { CartProvider } from "../contexts/CartContext";
+import ShoppingCart from "../components/cart/ShoppingCart";
 
 const PropertyWrapper = () => (
   <AuthProvider>
     <ProductsProvider>
       <CategoriesProvider>
-      <Outlet />
+        <CartProvider>
+          <Outlet />
+        </CartProvider>
       </CategoriesProvider>
     </ProductsProvider>
   </AuthProvider>
@@ -49,12 +51,16 @@ const Index = createBrowserRouter([
           { path: "products", element: <Products /> },
           { path: "productsDetails/:id", element: <ProductDetails /> },
           { path: "not-authorized", element: <NotAuthorized /> },
-          {path: "from-example", element:  <Example/> },
+          { path: "from-example", element: <Example /> },
 
           // Protected Route - Only for logged-in users
           {
             element: <ProtectedRoute />,
             children: [
+              {
+                path: "Shopping-cart",
+                element: <ShoppingCart/>
+              },
               {
                 path: "user-profile",
                 element: <div>user profile</div>, // Example: replace with actual protected route component
@@ -70,7 +76,7 @@ const Index = createBrowserRouter([
 
       // Admin Protected Route - Only for admin users
       {
-        path:"admin",
+        path: "admin",
         element: <AdminProtectedRoute />,
         children: [
           {
@@ -79,27 +85,27 @@ const Index = createBrowserRouter([
             children: [
               {
                 path: "manage-products",
-                element: <ManageProduct/>,
+                element: <ManageProduct />,
               },
               {
                 path: "newProduct",
-                element: <CreateNewProduct/>,
+                element: <CreateNewProduct />,
               },
               {
                 path: "editProduct/:id",
-                element: <UpdateProduct/>,
+                element: <UpdateProduct />,
               },
               {
                 path: "manage-categories",
-                element: <ManegeCategories/>,
+                element: <ManegeCategories />,
               },
               {
                 path: "newCategory",
-                element: <CreateNewCategory/>,
+                element: <CreateNewCategory />,
               },
               {
                 path: "editCategory/:id",
-                element: <UpdateCategory/>
+                element: <UpdateCategory />,
               },
               {
                 path: "manage-users",
