@@ -47,13 +47,13 @@ const Index = createBrowserRouter([
 
       { path: "login", element: <LoginForm /> },
       { path: "register", element: <RegisterForm /> },
-
+      {path: '/', element: <HomePage/>},
+      
       {
         path: "/",
         element: <StoreLayout />,
         children: [
           // Public Routes
-          {path: '/', element: <HomePage/>},
           { path: "products", element: <Products /> },
           { path: "productsDetails/:id", element: <ProductDetails /> },
           { path: "not-authorized", element: <NotAuthorized /> },

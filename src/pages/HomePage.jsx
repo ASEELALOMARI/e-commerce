@@ -2,23 +2,25 @@ import { Box, Container } from "@mui/material";
 import React from "react";
 import CategoryList from "../components/categories/CategoryList";
 import Products from "../components/products/Products";
+import Hero from "../components/home/Hero";
+import HomeLayout from "../components/layouts/HomeLayout";
 
 export default function HomePage() {
   return (
-    <Container>
+    <HomeLayout>
       {/* Hero */}
       <Box>
-        {/* Todo Add Store hero here */}
+        <Hero />
       </Box>
       {/* Category list */}
-      <Box>
+      <Box sx={{ px: 12 }}>
         <CategoryList />
       </Box>
 
       {/*  Product list */}
-      <Box>
-        <Products/>
+      <Box sx={{ px: 12 }}>
+        <Products />
       </Box>
-    </Container>
+    </HomeLayout>
   );
 }
