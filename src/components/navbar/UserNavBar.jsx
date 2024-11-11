@@ -6,6 +6,7 @@ import {
   Login,
   AdminPanelSettings,
   Logout,
+  Person2,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/UseAuthContext";
@@ -71,7 +72,11 @@ function UserNavBar() {
 
         {/* Show Admin Dashboard option if the user is an admin */}
         {isAdmin && (
-          <MenuItem onClick={handleMenuClose} component={Link} to="/admin/Dashboard">
+          <MenuItem
+            onClick={handleMenuClose}
+            component={Link}
+            to="/admin/Dashboard"
+          >
             <AdminPanelSettings fontSize="small" sx={{ marginRight: 1 }} />
             Admin Dashboard
           </MenuItem>
@@ -79,10 +84,20 @@ function UserNavBar() {
 
         {/* Show Log Out option only if the user is logged in */}
         {isLoggedIn && (
-          <MenuItem onClick={handleLogout}>
-            <Logout fontSize="small" sx={{ marginRight: 1 }} />
-            Log Out
-          </MenuItem>
+          <div>
+            <MenuItem onClick={handleLogout}>
+              <Logout fontSize="small" sx={{ marginRight: 1 }} />
+              Log Out
+            </MenuItem>
+            <MenuItem
+              onClick={handleMenuClose}
+              component={Link}
+              to="user-profile"
+            >
+              <Person2 fontSize="small" sx={{ marginRight: 1 }} />
+              User Profile
+            </MenuItem>
+          </div>
         )}
       </Menu>
     </>

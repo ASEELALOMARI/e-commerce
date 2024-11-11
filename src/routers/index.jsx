@@ -23,6 +23,7 @@ import { CartProvider } from "../contexts/CartContext";
 import ShoppingCart from "../components/cart/ShoppingCart";
 import { UsersProvider } from "../contexts/UsersContext";
 import ManageUsers from "../components/admin/manegeUsers/ManegeUsers";
+import UserProfilePage from "../components/profile/UserProfilePage";
 
 const PropertyWrapper = () => (
   <AuthProvider>
@@ -67,7 +68,7 @@ const Index = createBrowserRouter([
               },
               {
                 path: "user-profile",
-                element: <div>user profile</div>, // Example: replace with actual protected route component
+                element: <UserProfilePage/>, // Example: replace with actual protected route component
               },
               {
                 path: "order-history",

@@ -81,7 +81,7 @@ const DashboardNavBar = () => {
             <MenuItem
               onClick={handleMenuClose}
               component={Link}
-              to="admin/profile"
+              to="/user-profile"
             >
               Admin Profile
             </MenuItem>
