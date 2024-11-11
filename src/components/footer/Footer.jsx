@@ -64,7 +64,7 @@ const Footer = () => {
         {/* Copyright Section */}
         <Grid item xs={12} textAlign="center" sx={{ marginTop: 2 }}>
           <Typography variant="body2" color="textSecondary">
-            ©2020-{new Date().getFullYear()} MY STORE. All rights reserved.
+            ©2020-{new Date().getFullYear()} D FLOW. All rights reserved.
           </Typography>
         </Grid>
       </Grid>

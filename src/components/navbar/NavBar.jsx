@@ -12,10 +12,17 @@ const NavBar = () => {
       sx={{ backgroundColor: "white", boxShadow: "none", paddingX: 2 }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        {/* Logo Area */}
-        <Typography variant="h6" component="div" sx={{ color: "black" }}>
-          Store
-        </Typography>
+        <Box display="flex" alignItems="center">
+          <img
+            src="src/assets/DFlowLogoText.png" 
+            alt="Store Logo"
+            style={{
+              width: "150px",
+              height: "auto",
+              marginRight: "8px",
+            }}
+          />
+        </Box>
 
         {/* Navigation Links */}
         <Box sx={{ display: "flex", gap: 3 }}>

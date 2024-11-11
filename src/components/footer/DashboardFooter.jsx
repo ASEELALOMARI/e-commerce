@@ -8,7 +8,7 @@ function DashboardFooter() {
         <Grid container spacing={2} justifyContent="space-between">
           <Grid item>
             <Typography variant="caption">
-              © {new Date().getFullYear()} Made with love by ASEEL. All rights reserved.
+              © {new Date().getFullYear()} Made with love by ASEEL. All rights reserved for D-Flow.
             </Typography>
           </Grid>
         </Grid>

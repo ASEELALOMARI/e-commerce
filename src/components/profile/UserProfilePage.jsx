@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import {
   Box,
-  Button,
   CircularProgress,
   Divider,
+  IconButton,
   Paper,
+  Tooltip,
   Typography,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import UserProfile from "./UserProfile";
 import useAuthContext from "../../hooks/UseAuthContext";
@@ -131,21 +134,20 @@ const UserProfilePage = () => {
                 User Profile
               </Typography>
               {!isEdit ? (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={handleEdit}
-                >
-                  Edit Profile
-                </Button>
+                <Tooltip title="Edit Profile">
+                  <IconButton color="secondary" onClick={handleEdit}>
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
               ) : (
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => setIsEdit(false)}
-                >
-                  Back to Profile
-                </Button>
+                <Tooltip title="Back to Profile">
+                  <IconButton
+                    color="secondary"
+                    onClick={() => setIsEdit(false)}
+                  >
+                    <ArrowBackIcon />
+                  </IconButton>
+                </Tooltip>
               )}
             </Box>
 
@@ -161,11 +163,12 @@ const UserProfilePage = () => {
                   onSubmit={handleFormSubmit}
                 />
                 <Box sx={{ display: "flex", justifyContent: "center" }}>
-                {submitError && (
-                  <Typography sx={{ mb: 2, color: "error.main" }}>{submitError}</Typography>
-                )}
-                {isSubmitLoading && <CircularProgress />}
-
+                  {submitError && (
+                    <Typography sx={{ mb: 2, color: "error.main" }}>
+                      {submitError}
+                    </Typography>
+                  )}
+                  {isSubmitLoading && <CircularProgress />}
                 </Box>
               </>
             ) : (

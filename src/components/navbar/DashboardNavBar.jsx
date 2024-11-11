@@ -12,7 +12,7 @@ import {
 import { Notifications, AccountCircle, Logout } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-import reactLogo from "../../assets/react.svg";
+import reactLogo from "../../assets/DFlowLogo.png";
 import useAuthContext from "../../hooks/UseAuthContext";
 
 const DashboardNavBar = () => {
@@ -45,7 +45,7 @@ const DashboardNavBar = () => {
           <img
             src={reactLogo}
             alt="Store Logo"
-            style={{ height: 40, marginRight: 10 }}
+            style={{ height: 70, marginRight: 10 }}
           />
           <Typography variant="h6" sx={{ color: "text.secondary" }}>
             Admin Dashboard
