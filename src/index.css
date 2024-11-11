@@ -1,15 +1,15 @@
 :root {
   /* Primary Colors */
-  --primary-main: #536493;
-  --primary-light: #aeb7d1;
-  --primary-dark: #2e3751;
-  --primary-contrastText: #ffffff;
+  --primary-main: #002447;
+  --primary-light: #79c5e7;
+  --primary-dark: #1a3b5d; 
+  --primary-contrastText: #fffaf7;
   
   /* Secondary Colors */
-  --secondary-main: #88c273;
-  --secondary-light: #b4d8a6;
-  --secondary-dark: #345927;
-  --primary-contrastText: #ffffff;
+  --secondary-main: #bc672c;
+  --secondary-light: #f2dcc5;
+  --secondary-dark: #8c451e;
+  --secondary-contrastText: #ffffff;
 
   --hover-bg: #f1f1f1;
 }

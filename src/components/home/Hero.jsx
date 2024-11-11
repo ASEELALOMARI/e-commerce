@@ -18,12 +18,12 @@ const HeroSection = styled(Box)(({ theme, bgImage }) => ({
 const TextContainer = styled(Box)({
     maxWidth: "40%",
     textAlign: "left",
-    color: "#002447",
+    color: "var(--primary-main)",
     padding: "20px 30px",
     borderRadius: "8px",
     transition: "color 0.3s ease, transform 0.3s ease",
     "&:hover": {
-      color: "#bc672c", // Changes text color for both title and subtitle on hover
+      color: "var(--secondary-main)", // Changes text color for both title and subtitle on hover
       transform: "scale(1.03)", // Slight scaling effect for the entire box
     },
   });
@@ -49,7 +49,7 @@ const TextContainer = styled(Box)({
       display: "block",
       width: "0",
       height: "2px",
-      background: "#bc672c",
+      background: "var(--secondary-main)",
       transition: "width 0.3s",
       position: "absolute",
       bottom: -4,
@@ -63,13 +63,13 @@ const TextContainer = styled(Box)({
   const ShopButton = styled(Button)({
     marginTop: "20px",
     padding: "12px 24px",
-    backgroundColor: "#79c5e7",
-    color: "#002447",
+    backgroundColor: "var(--primary-light)",
+    color: "var(--primary-main)",
     fontWeight: "bold",
     transition: "transform 0.3s ease, box-shadow 0.3s ease",
     "&:hover": {
-      backgroundColor: "#bc672c",
-      color: "#fffaf7",
+      backgroundColor: "var(--secondary-main)",
+      color: "var(--primary-contrastText)",
       transform: "scale(1.1)", // Enhanced scaling effect
       boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.15)", // Adds a subtle shadow
     },

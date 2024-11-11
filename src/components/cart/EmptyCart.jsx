@@ -43,8 +43,8 @@ const EmptyCart = () => {
         color="primary"
         onClick={handleShopNow}
         sx={{
-          backgroundColor: "#88C273",
-          "&:hover": { backgroundColor: "#76a559" },
+          backgroundColor: "var(--primary-dark)",
+          "&:hover": { backgroundColor: "var(--primary-light)" },
           padding: "8px 16px",
         }}
       >

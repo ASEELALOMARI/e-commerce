@@ -3,16 +3,16 @@ import { createTheme } from "@mui/material/styles";
 const Theme = createTheme({
   palette: {
     primary: {
-      main: "#536493",
-      light: "#aeb7d1",
-      dark: "#2e3751",
-      contrastText: "#ffffff",
+      main: "#002447",
+      light: "#79c5e7",
+      dark: "#1a3b5d",
+      contrastText: "#fffaf7",
     },
     secondary: {
-        main: "#88C273",
-        light: "#b4d8a6",
-        dark: "#345927",
-        contrastText: "#ffffff",
+      main: "#bc672c",
+      light: "#f2dcc5",
+      dark: "#8c451e",
+      contrastText: "#ffffff",
     },
     shape: {
       borderRadius: 10,

@@ -30,11 +30,11 @@ function CategoryList() {
                 textAlign: "center",
                 "&:hover .avatar": {
                   transform: "scale(1.1)",
-                  borderColor: "#1976d2", // Change border color on hover
+                  borderColor: "var(--primary-light)", // Change border color on hover
                   boxShadow: 3,
                 },
                 "&:hover .categoryName": {
-                  color: "#1976d2", // Change text color on hover
+                  color: "var(--primary-light)", // Change text color on hover
                 },
               }}
             >

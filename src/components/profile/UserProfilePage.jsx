@@ -133,7 +133,7 @@ const UserProfilePage = () => {
               {!isEdit ? (
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   onClick={handleEdit}
                 >
                   Edit Profile
@@ -141,7 +141,7 @@ const UserProfilePage = () => {
               ) : (
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   onClick={() => setIsEdit(false)}
                 >
                   Back to Profile
