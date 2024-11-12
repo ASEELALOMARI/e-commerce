@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Container, Typography } from "@mui/material";
-import { Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import NavBar from "../navbar/NavBar";
@@ -17,8 +16,7 @@ const AuthLayout = ({ children, image, title, message }) => {
           alignItems: "center",
           justifyContent: "center",
           minHeight: "100vh",
-          //width: "100vw",
-          background: "linear-gradient(135deg, #f0f4ff, #cce2ff, #b3d1ff)", // Soft gradient background
+          background: "linear-gradient(135deg, #faf3ed, #f2dcc5, #ffffff)", // Soft gradient background
           padding: 4,
         }}
       >
@@ -31,8 +29,8 @@ const AuthLayout = ({ children, image, title, message }) => {
             borderRadius: 4,
             boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.15)",
             overflow: "hidden",
-            bgcolor: "rgba(255, 255, 255, 0.8)", // Glassmorphism effect
-            backdropFilter: "blur(10px)",
+            bgcolor: "#fffaf7", // Light main background
+            width:'100%'
           }}
         >
           {/* Left Side - Form Area */}
@@ -43,14 +41,14 @@ const AuthLayout = ({ children, image, title, message }) => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              bgcolor: "white",
-              borderRadius: "12px 0 0 12px", // Rounded edges on one side
+              bgcolor: "#fffaf7", // Light main background
+              borderRadius: "12px 0 0 12px",
             }}
           >
-            <Typography variant="h4" sx={{ mb: 3, color: "#333" }}>
+            <Typography variant="h4" sx={{ mb: 3, color: "#002447" }}>
               {title}
             </Typography>
-            <Typography variant="body2" sx={{ mb: 4, color: "#555" }}>
+            <Typography variant="body2" sx={{ mb: 4, color: "#bc672c" }}>
               {message}
             </Typography>
             {children}
@@ -63,9 +61,10 @@ const AuthLayout = ({ children, image, title, message }) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "linear-gradient(to right, #6bc4ff, #83d5f8)",
+              background: "linear-gradient(to right, #002447, #79c5e7)",
               position: "relative",
               borderRadius: "0 12px 12px 0",
+              width:'100%'
             }}
           >
             <img
@@ -74,7 +73,7 @@ const AuthLayout = ({ children, image, title, message }) => {
               style={{
                 maxWidth: "80%",
                 borderRadius: "12px",
-                boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.15)",
+                // boxShadow: "0px 8px 24px rgba(0, 0, 0, 0.15)",
               }}
             />
             {/* Decorative Elements */}
@@ -83,11 +82,11 @@ const AuthLayout = ({ children, image, title, message }) => {
                 position: "absolute",
                 top: 20,
                 right: 20,
-                width: 'auto',
+                width: 50,
                 height: 50,
                 borderRadius: "50%",
-                bgcolor: "#ffffff44",
-                backdropFilter: "blur(10px)",
+                bgcolor: "#fffaf7",
+                opacity: 0.5,
               }}
             />
             <Box
@@ -98,13 +97,12 @@ const AuthLayout = ({ children, image, title, message }) => {
                 width: 30,
                 height: 30,
                 borderRadius: "50%",
-                bgcolor: "#ffffff33",
-                backdropFilter: "blur(10px)",
+                bgcolor: "#fffaf7",
+                opacity: 0.3,
               }}
             />
           </Box>
         </Container>
-        {/* Footer */}
       </Box>
       <Footer />
     </>
@@ -115,7 +113,7 @@ AuthLayout.propTypes = {
   children: PropTypes.node,
   image: PropTypes.string,
   title: PropTypes.string,
-  massage: PropTypes.string,
+  message: PropTypes.string,
 };
 
 export default AuthLayout;

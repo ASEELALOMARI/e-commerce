@@ -17,6 +17,7 @@ import { Delete, Remove, Add } from "@mui/icons-material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import UseCartContext from "../../hooks/UseCartContext";
 import EmptyCart from "./EmptyCart";
+import PageTitle from "../../utility/PageTitle";
 
 function ShoppingCart() {
   const { cartItem, removeFromCart, updateQuantity, resetCart } =
@@ -39,6 +40,7 @@ function ShoppingCart() {
 
   return (
     <Paper sx={{ padding: 4, maxWidth: 800, margin: "auto" }}>
+            <PageTitle title="shopping cart" />
       <Typography variant="h4" gutterBottom>
         Shopping Cart
       </Typography>

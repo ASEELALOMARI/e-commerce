@@ -76,7 +76,7 @@ const LoginForm = () => {
   return (
     <AuthLayout
       image={
-        "https://res.cloudinary.com/dligtpmdv/image/upload/v1730749737/Group_of_customers_shopping_in_online_store_and_huge_tablet_ynkuum.jpg"
+      'https://res.cloudinary.com/dligtpmdv/image/upload/v1731436010/_81802c20-49b1-4724-9cfd-6fdce5bb4b06-removebg-preview_kw4yg6.png'
       }
       title={"Welcome Back"}
       message={"Please log in to your account to continue"}

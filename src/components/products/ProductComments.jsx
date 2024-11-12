@@ -27,7 +27,7 @@ const ProductComments = ({ productId }) => {
         const commentsData = response.data.$values;
         setComments(commentsData);
       } catch (error) {
-        setError("Could not load comments. Please try again later.");
+        setError(error.response.data.message);
       } finally {
         setLoading(false);
       }
@@ -46,7 +46,7 @@ const ProductComments = ({ productId }) => {
 
   if (error) {
     return (
-      <Box textAlign="center" color="error.main">
+      <Box textAlign="center" color="text.secondary">
         <Typography variant="body1">{error}</Typography>
       </Box>
     );
