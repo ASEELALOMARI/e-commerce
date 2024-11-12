@@ -6,8 +6,7 @@ export const getFilteredProduct = async (
   searchBy = "",
   page = 1,
   pageSize = 8,
-  sortBy = "",
-  signal
+  sortBy = ""
 ) => {
   const params = new URLSearchParams();
 
@@ -16,9 +15,7 @@ export const getFilteredProduct = async (
   if (pageSize) params.append("PageSize", pageSize);
   if (sortBy) params.append("Sort", sortBy);
 
-  const response = await axios.get(`${API_BASE_URL}?${params.toString()}`, {
-    signal,
-  });
+  const response = await axios.get(`${API_BASE_URL}?${params.toString()}`);
   return response.data;
 };
 

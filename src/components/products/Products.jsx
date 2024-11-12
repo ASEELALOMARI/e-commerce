@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Skeleton, Typography, Card } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 
@@ -15,11 +15,16 @@ export default function Products() {
 
   const productsList = products.map((product) => {
     return (
-      <Grid item={'true'} key={product.productId} size={{ xs: 9, sm: 4, md: 4, lg: 3 }}>
+      <Grid
+        item={"true"}
+        key={product.productId}
+        size={{ xs: 9, sm: 4, md: 4, lg: 3 }}
+      >
         <Product data={product} />
       </Grid>
     );
   });
+
   return (
     <>
       {/* Title */}
@@ -27,8 +32,8 @@ export default function Products() {
         <Typography variant="h2">Products</Typography>
       </Box>
       {/* Sort */}
-      <Box sx={{ m: 2, position: "relative"}}>
-        <SortBox/>
+      <Box sx={{ m: 2, position: "relative" }}>
+        <SortBox />
       </Box>
       {/* List */}
       <Box sx={{ width: "100%" }}>
@@ -40,7 +45,11 @@ export default function Products() {
         >
           {isLoading ? (
             Array.from({ length: skeletonCount }).map((_, index) => (
-              <Grid item={'true'} key={index} size={{ xs: 12, sm: 4, md: 4, lg: 3 }}>
+              <Grid
+                item={"true"}
+                key={index}
+                size={{ xs: 12, sm: 4, md: 4, lg: 3 }}
+              >
                 <Card sx={{ maxWidth: 345, boxShadow: 1, borderRadius: 2 }}>
                   <Box sx={{ padding: 5 }}>
                     <Skeleton variant="rounded" width={210} height={200} />
@@ -54,16 +63,18 @@ export default function Products() {
             ))
           ) : (
             <>
-              {/* Display NotFound component if there is an error */}
-              {error ? (
-                <Box sx={{ width:"100%" }}>
-                  <NotFound message={error} />
-                </Box>
+              {products && products.length > 0 ? (
+                <>{productsList}</>
               ) : (
                 <>
-                  {/* Display the products list if products are available */}
-                  {products && products.length > 0 && (
-                    <>{productsList}</>
+                  {error ? (
+                    <Box sx={{ width: "100%" }}>
+                      <NotFound message={error} />
+                    </Box>
+                  ) : (
+                    <Box sx={{ m: 2 }}>
+                      <NotFound message={"No Product Found"} />
+                    </Box>
                   )}
                 </>
               )}

@@ -23,8 +23,6 @@ export const ProductsProvider = ({ children }) => {
   const [sortValue, setSortValue] = useState("name_asc");
 
   useEffect(() => {
-    const controller = new AbortController();
-
     const fetchProducts = async () => {
       setIsLoading(true);
       setError(null);
@@ -34,7 +32,6 @@ export const ProductsProvider = ({ children }) => {
           pageValue,
           pageSizeValue,
           sortValue,
-          controller.signal,
         );
         const data = response.data.items.$values;
         setProducts(data);
@@ -51,8 +48,6 @@ export const ProductsProvider = ({ children }) => {
     };
 
     fetchProducts();
-    // Clean up function to cancel the request
-    return () => controller.abort();
   }, [searchValue, pageValue, sortValue]);
 
   //Add new products to the current product list.
@@ -64,7 +59,9 @@ export const ProductsProvider = ({ children }) => {
   const editProduct = (updatedProduct) => {
     setProducts((prevProducts) =>
       prevProducts.map((p) =>
-        p.productId === updatedProduct.productId ? { ...p, ...updatedProduct } : p
+        p.productId === updatedProduct.productId
+          ? { ...p, ...updatedProduct }
+          : p
       )
     );
   };
