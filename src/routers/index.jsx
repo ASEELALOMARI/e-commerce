@@ -27,17 +27,17 @@ import UserProfilePage from "../components/profile/UserProfilePage";
 import HomePage from "../pages/HomePage";
 
 const PropertyWrapper = () => (
-  <AuthProvider>
-    <UsersProvider>
-      <ProductsProvider>
-        <CategoriesProvider>
-          <CartProvider>
+  <CartProvider>
+    <AuthProvider>
+      <UsersProvider>
+        <ProductsProvider>
+          <CategoriesProvider>
             <Outlet />
-          </CartProvider>
-        </CategoriesProvider>
-      </ProductsProvider>
-    </UsersProvider>
-  </AuthProvider>
+          </CategoriesProvider>
+        </ProductsProvider>
+      </UsersProvider>
+    </AuthProvider>
+  </CartProvider>
 );
 const Index = createBrowserRouter([
   {
@@ -47,8 +47,8 @@ const Index = createBrowserRouter([
 
       { path: "login", element: <LoginForm /> },
       { path: "register", element: <RegisterForm /> },
-      {path: '/', element: <HomePage/>},
-      
+      { path: "/", element: <HomePage /> },
+
       {
         path: "/",
         element: <StoreLayout />,
@@ -69,7 +69,7 @@ const Index = createBrowserRouter([
               },
               {
                 path: "user-profile",
-                element: <UserProfilePage/>, 
+                element: <UserProfilePage />,
               },
               {
                 path: "order-history",

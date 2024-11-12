@@ -1,17 +1,20 @@
 import React, { createContext, useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+
+import UseCartContext from "../hooks/UseCartContext";
 
 // Create AuthContext
 export const AuthContext = createContext();
 
 // AuthProvider component to wrap your app
 export const AuthProvider = ({ children }) => {
-
+  const { resetCart } = UseCartContext();
+  
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
   const storedIsLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const storedIsAdmin = localStorage.getItem("isAdmin") === "true";
-  
+
   const [user, setUser] = useState(storedUser);
   const [token, setToken] = useState(storedToken);
   const [isLoggedIn, setIsLoggedIn] = useState(storedIsLoggedIn);
@@ -43,6 +46,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("isAdmin");
+    resetCart();
   };
 
   return (
