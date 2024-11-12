@@ -9,19 +9,30 @@ import {
   Typography,
   Box,
   Rating,
+  Badge,
 } from "@mui/material";
-import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
+import {
+  AddShoppingCart,
+  ShoppingCart,
+  FavoriteBorder,
+} from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import UseCartContext from "../../hooks/UseCartContext";
-import e from "cors";
+import Theme from "../../styles/Theme";
 
 function Product({ data }) {
-  const {addToCart} = UseCartContext();
+  const { cartItem, addToCart } = UseCartContext();
 
-  const handelAddItemToCart = ()=>{
+  // Check if the product is already in the cart
+  const isInCart = cartItem.some((item) => item.productId === data.productId);
+  const numberInCart = cartItem
+  .filter((item) => item.productId === data.productId)
+  .reduce((total, item) => total + item.quantity, 0);
+
+  const handleAddItemToCart = () => {
     addToCart(data);
-    console.log("Added to cart: ", data);
-  }
+  };
+
   return (
     <Card
       sx={{
@@ -61,8 +72,27 @@ function Product({ data }) {
 
       {/* Actions: Add to Cart and Wishlist */}
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to Cart" color="primary" onClick={handelAddItemToCart}>
-          <AddShoppingCart />
+        <IconButton
+          aria-label="Add to Cart"
+          color="primary"
+          onClick={handleAddItemToCart}
+        >
+          {isInCart ? (
+            <Badge
+              badgeContent={numberInCart}
+              sx={{
+                "& .MuiBadge-badge": {
+                  backgroundColor: Theme.palette.primary.light,
+                  color: Theme.palette.primary.contrastText,
+                },
+              }}
+            >
+              {" "}
+              <ShoppingCart />{" "}
+            </Badge>
+          ) : (
+            <AddShoppingCart />
+          )}
         </IconButton>
         <IconButton aria-label="Add to Wishlist" color="secondary">
           <FavoriteBorder />
@@ -79,6 +109,7 @@ Product.propTypes = {
     price: PropTypes.number.isRequired,
     description: PropTypes.string,
     imageURL: PropTypes.string.isRequired,
+    rating: PropTypes.number,
   }).isRequired,
 };
 

@@ -62,13 +62,8 @@ export default function Products() {
               ) : (
                 <>
                   {/* Display the products list if products are available */}
-                  {products && products.length > 0 ? (
+                  {products && products.length > 0 && (
                     <>{productsList}</>
-                  ) : (
-                    // If no products and no error, display a NotFound message for empty search results
-                    <Box sx={{ width:"100%" }}>
-                      <NotFound message="No products found." />
-                    </Box>
                   )}
                 </>
               )}
