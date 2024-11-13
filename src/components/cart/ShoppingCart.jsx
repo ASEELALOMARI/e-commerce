@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -12,17 +12,34 @@ import {
   Divider,
   Button,
   TextField,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Grid,
+  CircularProgress,
 } from "@mui/material";
 import { Delete, Remove, Add } from "@mui/icons-material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import UseCartContext from "../../hooks/UseCartContext";
 import EmptyCart from "./EmptyCart";
 import PageTitle from "../../utility/PageTitle";
+import { FaCcPaypal, FaCcVisa } from "react-icons/fa";
+import PaymentMethodSelector from "./PaymentMethodSelector";
+import { sendNewOrder } from "../../services/OrderServices";
+import useAuthContext from "../../hooks/UseAuthContext";
+import {
+  showErrorMessage,
+  showSuccessMessage,
+} from "../../utility/ToastMessages";
 
 function ShoppingCart() {
   const { cartItem, removeFromCart, updateQuantity, resetCart } =
     UseCartContext();
+  const { token } = useAuthContext();
   const [address, setAddress] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("CreditCard");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Update quantity of a product
   const handleUpdateQuantity = (productId, change) => {
@@ -34,21 +51,41 @@ function ShoppingCart() {
     removeFromCart(productId);
   };
 
-  const handelReset = () => {
+  const handleReset = () => {
     resetCart();
+  };
+
+  // Handle checkout submission
+  const handleSubmit = async () => {
+    const orderData = {
+      orderItems: cartItem.map((item) => ({
+        productId: item.productId,
+        quantity: item.quantity,
+      })),
+      method: paymentMethod,
+    };
+    setIsLoading(true);
+    try {
+      const response = await sendNewOrder(token, orderData);
+      showSuccessMessage(response.message);
+      resetCart();
+      //Todo navigate to order page
+    } catch (err) {
+      showErrorMessage(err.response.data.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <Paper sx={{ padding: 4, maxWidth: 800, margin: "auto" }}>
-            <PageTitle title="shopping cart" />
+      <PageTitle title="Shopping Cart" />
       <Typography variant="h4" gutterBottom>
         Shopping Cart
       </Typography>
 
       {cartItem.length === 0 ? (
-        <Box>
-          <EmptyCart />
-        </Box>
+        <EmptyCart />
       ) : (
         <>
           <List>
@@ -91,47 +128,35 @@ function ShoppingCart() {
               </React.Fragment>
             ))}
           </List>
+
+          {/* Reset Cart */}
           <Box
             sx={{
-              width: "100%",
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
-              marginRight: 4,
+              mt: 2,
             }}
           >
-            <IconButton
-              color="primary"
-              onClick={handelReset}
-              sx={{
-                marginRight: 2,
-                "&:hover": {
-                  backgroundColor: "rgba(136, 194, 115, 0.1)",
-                },
-              }}
-            >
+            <IconButton color="primary" onClick={handleReset}>
               <Typography variant="body2">Reset Cart</Typography>
               <RestartAltIcon />
             </IconButton>
           </Box>
 
-          <Box sx={{ marginTop: 4 }}>
-            <Typography variant="h6">Shipping Address</Typography>
-            <TextField
-              fullWidth
-              placeholder="Enter your address"
-              variant="outlined"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              sx={{ marginY: 2 }}
-            />
-          </Box>
+          {/* Payment Method Selection */}
+          <PaymentMethodSelector
+            paymentMethod={paymentMethod}
+            setPaymentMethod={setPaymentMethod}
+          />
 
+          {/* Checkout and Total */}
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
-              marginTop: 3,
+              alignItems: "center",
+              mt: 3,
             }}
           >
             <Typography variant="h6">
@@ -140,16 +165,20 @@ function ShoppingCart() {
                 .reduce((acc, item) => acc + item.price * item.quantity, 0)
                 .toFixed(2)}
             </Typography>
-            {cartItem.length >= 1 && (
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => alert("Proceeding to checkout...")}
-              >
-                Checkout
-              </Button>
-            )}
+            <Button
+              variant="contained"
+              color="primary"
+              disabled={cartItem.length < 1}
+              onClick={handleSubmit}
+            >
+              Checkout
+            </Button>
           </Box>
+          {isLoading && (
+            <Box m={2}>
+              <CircularProgress color="primary" />
+            </Box>
+          )}
         </>
       )}
     </Paper>
