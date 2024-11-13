@@ -23,15 +23,15 @@ import HomePage from "../pages/HomePage";
 import CategoryPage from "../components/categories/CategoryPage";
 import CategoriesPage from "../pages/CategoriesPage";
 import UserOrders from "../components/UserOrder/UserOrders";
-import Example from "../components/form/example";
-import ManageProduct from "../components/admin/manegeProduct/ManegeProduct";
-import CreateNewProduct from "../components/admin/manegeProduct/CreateNewProduct";
-import UpdateProduct from "../components/admin/manegeProduct/UpdateProduct";
-import CreateNewCategory from "../components/admin/manegeCategories/CreateNewCategory";
-import ManageUsers from "../components/admin/manegeUsers/ManegeUsers";
-import ManegeCategories from "../components/admin/manegeCategories/ManegeCategories";
-import ManageOrders from "../components/admin/manegeOrders/ManegeOrders";
-import UpdateCategory from "../components/admin/manegeCategories/UpdateCategory";
+import Example from "../components/form/Example";
+import ManageProduct from "../components/Admin/manegeProduct/ManegeProduct";
+import CreateNewProduct from "../components/Admin/manegeProduct/CreateNewProduct";
+import UpdateProduct from "../components/Admin/manegeProduct/UpdateProduct";
+import CreateNewCategory from "../components/Admin/manegeCategories/CreateNewCategory";
+import ManageUsers from "../components/Admin/manegeUsers/ManegeUsers";
+import ManegeCategories from "../components/Admin/manegeCategories/ManegeCategories";
+import ManageOrders from "../components/Admin/manegeOrders/ManegeOrders";
+import UpdateCategory from "../components/Admin/manegeCategories/UpdateCategory";
 
 const PropertyWrapper = () => (
   <CartProvider>
