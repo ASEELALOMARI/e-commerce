@@ -1,35 +1,37 @@
 import { createBrowserRouter, Outlet } from "react-router-dom";
 
+import { AuthProvider } from "../contexts/AuthContext";
+import { ProductsProvider } from "../contexts/ProductsContext";
+import { CategoriesProvider } from "../contexts/CategoriesContext";
+import { CartProvider } from "../contexts/CartContext";
+import { UsersProvider } from "../contexts/UsersContext";
+
+import AdminProtectedRoute from "./AdminProtectedRoute";
+import ProtectedRoute from "./ProtectedRoute";
+
 import Products from "../components/products/Products";
 import StoreLayout from "../components/layouts/StoreLayout";
 import DashboardLayout from "../components/layouts/DashboardLayout";
 import LoginForm from "../components/auth/LoginForm";
 import RegisterForm from "../components/auth/RegisterForm";
-import { AuthProvider } from "../contexts/AuthContext";
-import { ProductsProvider } from "../contexts/ProductsContext";
-import ProtectedRoute from "./ProtectedRoute";
-import AdminProtectedRoute from "./AdminProtectedRoute";
 import NotAuthorized from "../components/responses/NotAuthorized";
+import NotFound from "../components/responses/NotFound";
 import ProductDetails from "../components/products/ProductDetails";
-import ManegeCategories from "../components/admin/manegeCategories/ManegeCategories";
-import { CategoriesProvider } from "../contexts/CategoriesContext";
-import CreateNewCategory from "../components/admin/manegeCategories/CreateNewCategory";
-import UpdateCategory from "../components/admin/manegeCategories/UpdateCategory";
-import { CartProvider } from "../contexts/CartContext";
 import ShoppingCart from "../components/cart/ShoppingCart";
-import { UsersProvider } from "../contexts/UsersContext";
-import ManageUsers from "../components/admin/manegeUsers/ManegeUsers";
 import UserProfilePage from "../components/profile/UserProfilePage";
 import HomePage from "../pages/HomePage";
 import CategoryPage from "../components/categories/CategoryPage";
 import CategoriesPage from "../pages/CategoriesPage";
-import ManageOrders from "../components/admin/manegeOrders/ManegeOrders";
 import UserOrders from "../components/UserOrder/UserOrders";
-import NotFound from "../components/responses/NotFound";
 import Example from "../components/form/example";
 import ManageProduct from "../components/admin/manegeProduct/ManegeProduct";
 import CreateNewProduct from "../components/admin/manegeProduct/CreateNewProduct";
 import UpdateProduct from "../components/admin/manegeProduct/UpdateProduct";
+import CreateNewCategory from "../components/admin/manegeCategories/CreateNewCategory";
+import ManageUsers from "../components/admin/manegeUsers/ManegeUsers";
+import ManegeCategories from "../components/admin/manegeCategories/ManegeCategories";
+import ManageOrders from "../components/admin/manegeOrders/ManegeOrders";
+import UpdateCategory from "../components/admin/manegeCategories/UpdateCategory";
 
 const PropertyWrapper = () => (
   <CartProvider>
