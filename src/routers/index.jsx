@@ -25,6 +25,8 @@ import { UsersProvider } from "../contexts/UsersContext";
 import ManageUsers from "../components/admin/manegeUsers/ManegeUsers";
 import UserProfilePage from "../components/profile/UserProfilePage";
 import HomePage from "../pages/HomePage";
+import CategoryPage from "../components/categories/CategoryPage";
+import CategoriesPage from "../pages/CategoriesPage";
 
 const PropertyWrapper = () => (
   <CartProvider>
@@ -55,7 +57,9 @@ const Index = createBrowserRouter([
         children: [
           // Public Routes
           { path: "products", element: <Products /> },
+          { path: "Category", element: <CategoriesPage /> },
           { path: "productsDetails/:id", element: <ProductDetails /> },
+          { path: "Category/:id", element: <CategoryPage /> },
           { path: "not-authorized", element: <NotAuthorized /> },
           { path: "from-example", element: <Example /> },
 

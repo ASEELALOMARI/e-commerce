@@ -15,7 +15,7 @@ export const getCategoriesList = async (sortBy = "", signal) => {
   return response.data;
 };
 
-export const GetCategoryByID = async (id) => {
+export const getCategoryByID = async (id) => {
   const response = await axios.get(`${API_BASE_URL}/${id}`);
   return response.data;
 };

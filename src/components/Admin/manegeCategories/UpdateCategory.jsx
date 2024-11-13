@@ -5,7 +5,7 @@ import { Box, CircularProgress, Paper } from "@mui/material";
 import UseCategoriesContext from "../../../hooks/UseCategoriesContext";
 import useAuthContext from "../../../hooks/UseAuthContext";
 import {
-  GetCategoryByID,
+  getCategoryByID,
   updateCategory,
 } from "../../../services/CategoriesServices";
 import UpdatedFrom from "../../form/UpdatedForm";
@@ -47,7 +47,7 @@ function UpdateCategory() {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const categoryData = await GetCategoryByID(id);
+        const categoryData = await getCategoryByID(id);
         setCategory(categoryData.data);
       } catch (error) {
         showErrorMessage(`Error fetching Category details: ${error.message}`);

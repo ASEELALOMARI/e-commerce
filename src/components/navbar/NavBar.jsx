@@ -37,9 +37,9 @@ const NavBar = () => {
           <Button color="inherit" href="/products" sx={{ color: "black" }}>
             Products
           </Button>
-          <Button color="inherit" href="/new" sx={{ color: "black" }} >
+          {/* <Button color="inherit" href="/new" sx={{ color: "black" }} >
             New
-          </Button>
+          </Button> */}
           <Button color="inherit" href="/category" sx={{ color: "black" }}>
             Category
           </Button>
@@ -82,9 +82,9 @@ const NavBar = () => {
             <ListItem button component="a" href="/products">
               <ListItemText primary="Products" />
             </ListItem>
-            <ListItem button component="a" href="/new">
+            {/* <ListItem button component="a" href="/new">
               <ListItemText primary="New" />
-            </ListItem>
+            </ListItem> */}
             <ListItem button component="a" href="/category">
               <ListItemText primary="Category" />
             </ListItem>

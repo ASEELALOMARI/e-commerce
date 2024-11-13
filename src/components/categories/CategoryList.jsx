@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { Typography, Box, Avatar } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { useNavigate } from "react-router-dom";
 
 import UseCategoriesContext from "../../hooks/UseCategoriesContext";
 
-function CategoryList() {
+function CategoryList({onHandelID}) {
   const { categories } = UseCategoriesContext();
 
   const navigate = useNavigate();
 
   const handleCategoryClick = (id) => {
-    console.log("categoryID", id);
-    //navigate(`/category/${id}`);
+    if(onHandelID){
+      onHandelID(id);
+    }else{
+
+      navigate(`/category/${id}`);
+    }
   };
 
   return (
@@ -66,5 +71,9 @@ function CategoryList() {
     </Box>
   );
 }
+
+CategoryList.propTypes = {
+  onHandelID: PropTypes.func,
+};
 
 export default CategoryList;
