@@ -24,7 +24,7 @@ export const UsersProvider = ({ children }) => {
         setUsers(response.data.items.$values);
       } catch (error) {
         if (error.name === "CanceledError") {
-          console.log("Fetch canceled");
+          setError('Fetch canceled');
           return;
         }
         console.log(error.message);

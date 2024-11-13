@@ -6,7 +6,7 @@ import {
   Typography,
   CircularProgress,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   formContainerStyles,
@@ -76,7 +76,7 @@ const LoginForm = () => {
   return (
     <AuthLayout
       image={
-      'https://res.cloudinary.com/dligtpmdv/image/upload/v1731436010/_81802c20-49b1-4724-9cfd-6fdce5bb4b06-removebg-preview_kw4yg6.png'
+        "https://res.cloudinary.com/dligtpmdv/image/upload/v1731436010/_81802c20-49b1-4724-9cfd-6fdce5bb4b06-removebg-preview_kw4yg6.png"
       }
       title={"Welcome Back"}
       message={"Please log in to your account to continue"}
@@ -113,12 +113,19 @@ const LoginForm = () => {
         >
           Login
         </Button>
+
         {isLoading && (
           <Box m={2}>
             <CircularProgress color="primary" />
           </Box>
         )}
       </Box>
+      <Typography variant="body2" sx={{ p: 3 }}>
+        Are you new?{" "}
+        <Link to="/register" color="primary" underline="hover">
+          Create a new account
+        </Link>
+      </Typography>
     </AuthLayout>
   );
 };

@@ -13,6 +13,6 @@ export const urlToFile = async (imageUrl, fileName) => {
   // Example usage:
 //   const imageUrl = "https://example.com/path/to/image.jpg";
 //   const file = urlToFile(imageUrl, "image.jpg");
-//   console.log(file);
+
 
   

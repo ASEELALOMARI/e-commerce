@@ -32,7 +32,7 @@ const NotFound = ({ message = "No data found." }) => {
       </Typography>
 
       <Typography variant="body1" color="text.secondary" sx={{ marginTop: 1 }}>
-        We couldn’t find any products at this moment. Try refreshing the page or come back later.
+        We couldn’t find any item at this moment. Try refreshing the page or come back later.
       </Typography>
 
       {/* Go Back Button */}

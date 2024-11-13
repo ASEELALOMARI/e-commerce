@@ -51,7 +51,7 @@ const fields = [
   
 
 const handleSubmit = (formData) => {
-  console.log("Form submitted:", formData);
+  //console.log("Form submitted:", formData);
 };
 
 function Example() {

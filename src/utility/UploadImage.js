@@ -19,7 +19,7 @@ export const uploadImageToCloudinary = async (file) => {
       },
     });
 
-    console.log("Image uploaded successfully:", response.data);
+   // console.log("Image uploaded successfully:", response.data);
     return response.data.secure_url; // Return the URL of the uploaded image
   } catch (error) {
     console.error(

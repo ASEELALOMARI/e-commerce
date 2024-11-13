@@ -38,7 +38,7 @@ export const ProductsProvider = ({ children }) => {
         setTotalItems(response.data.totalItems);
       } catch (error) {
         if (axios.isCancel(error)) {
-          console.log("Fetch canceled");
+          setError('Fetch canceled');
         } else {
           setError(error.message);
         }

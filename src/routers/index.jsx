@@ -29,6 +29,7 @@ import CategoryPage from "../components/categories/CategoryPage";
 import CategoriesPage from "../pages/CategoriesPage";
 import ManageOrders from "../components/admin/manegeOrders/ManegeOrders";
 import UserOrders from "../components/UserOrder/UserOrders";
+import NotFound from "../components/responses/NotFound";
 
 const PropertyWrapper = () => (
   <CartProvider>
@@ -46,12 +47,13 @@ const PropertyWrapper = () => (
 const Index = createBrowserRouter([
   {
     element: <PropertyWrapper />,
+    errorElement: <NotFound message={'Page Not Found'}/>,
     children: [
       // Auth Route
 
       { path: "login", element: <LoginForm /> },
       { path: "register", element: <RegisterForm /> },
-      { path: "/", element: <HomePage /> },
+      { path: "/", element: <HomePage />},
 
       {
         path: "/",

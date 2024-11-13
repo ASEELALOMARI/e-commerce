@@ -23,7 +23,7 @@ export const CategoriesProvider = ({ children }) => {
         setCategories(data);
       } catch (error) {
         if (axios.isCancel(error)) {
-          console.log("Fetch canceled");
+          setError('Fetch canceled');
         } else {
           setError(error.message);
         }
