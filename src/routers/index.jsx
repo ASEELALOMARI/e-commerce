@@ -11,7 +11,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import NotAuthorized from "../components/responses/NotAuthorized";
 import ProductDetails from "../components/products/ProductDetails";
-import Example from "../components/form/example";
 import ManageProduct from "../components/admin/manegeProduct/ManegeProduct";
 import CreateNewProduct from "../components/admin/manegeProduct/CreateNewProduct";
 import UpdateProduct from "../components/admin/manegeProduct/UpdateProduct";
@@ -65,7 +64,6 @@ const Index = createBrowserRouter([
           { path: "productsDetails/:id", element: <ProductDetails /> },
           { path: "Category/:id", element: <CategoryPage /> },
           { path: "not-authorized", element: <NotAuthorized /> },
-          { path: "from-example", element: <Example /> },
 
           // Protected Route - Only for logged-in users
           {
