@@ -27,6 +27,8 @@ import UserProfilePage from "../components/profile/UserProfilePage";
 import HomePage from "../pages/HomePage";
 import CategoryPage from "../components/categories/CategoryPage";
 import CategoriesPage from "../pages/CategoriesPage";
+import ManageOrders from "../components/admin/manegeOrders/ManegeOrders";
+import UserOrders from "../components/UserOrder/UserOrders";
 
 const PropertyWrapper = () => (
   <CartProvider>
@@ -76,8 +78,8 @@ const Index = createBrowserRouter([
                 element: <UserProfilePage />,
               },
               {
-                path: "order-history",
-                element: <div>user order</div>,
+                path: "user-orders",
+                element: <UserOrders/>,
               },
             ],
           },
@@ -123,7 +125,7 @@ const Index = createBrowserRouter([
               },
               {
                 path: "manage-orders",
-                element: <div>manage orders</div>,
+                element: <ManageOrders/>,
               },
               {
                 path: "settings",

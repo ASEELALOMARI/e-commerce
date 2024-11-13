@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Typography,
@@ -21,10 +22,10 @@ import {
 } from "@mui/material";
 import { Delete, Remove, Add } from "@mui/icons-material";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+
 import UseCartContext from "../../hooks/UseCartContext";
 import EmptyCart from "./EmptyCart";
 import PageTitle from "../../utility/PageTitle";
-import { FaCcPaypal, FaCcVisa } from "react-icons/fa";
 import PaymentMethodSelector from "./PaymentMethodSelector";
 import { sendNewOrder } from "../../services/OrderServices";
 import useAuthContext from "../../hooks/UseAuthContext";
@@ -40,6 +41,7 @@ function ShoppingCart() {
   const [address, setAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("CreditCard");
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Update quantity of a product
   const handleUpdateQuantity = (productId, change) => {
@@ -69,7 +71,7 @@ function ShoppingCart() {
       const response = await sendNewOrder(token, orderData);
       showSuccessMessage(response.message);
       resetCart();
-      //Todo navigate to order page
+      navigate("/user-orders");
     } catch (err) {
       showErrorMessage(err.response.data.message);
     } finally {

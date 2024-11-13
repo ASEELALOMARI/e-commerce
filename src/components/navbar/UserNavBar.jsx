@@ -10,6 +10,8 @@ import {
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/UseAuthContext";
+import { FaJediOrder } from "react-icons/fa";
+import { RiOrderPlayFill } from "react-icons/ri";
 
 function UserNavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -96,6 +98,14 @@ function UserNavBar() {
             >
               <Person2 fontSize="small" sx={{ marginRight: 1 }} />
               User Profile
+            </MenuItem>
+            <MenuItem
+              onClick={handleMenuClose}
+              component={Link}
+              to="user-orders"
+            >
+              <RiOrderPlayFill fontSize="small" sx={{ marginRight: 1 }} />
+              User Orders
             </MenuItem>
           </div>
         )}
