@@ -11,7 +11,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import NotAuthorized from "../components/responses/NotAuthorized";
 import ProductDetails from "../components/products/ProductDetails";
-import UpdateProduct from "../components/admin/manegeProduct/UpdateProduct";
 import ManegeCategories from "../components/admin/manegeCategories/ManegeCategories";
 import { CategoriesProvider } from "../contexts/CategoriesContext";
 import CreateNewCategory from "../components/admin/manegeCategories/CreateNewCategory";
@@ -30,6 +29,7 @@ import NotFound from "../components/responses/NotFound";
 import Example from "../components/form/example";
 import ManageProduct from "../components/admin/manegeProduct/ManegeProduct";
 import CreateNewProduct from "../components/admin/manegeProduct/CreateNewProduct";
+import UpdateProduct from "../components/admin/manegeProduct/UpdateProduct";
 
 const PropertyWrapper = () => (
   <CartProvider>
