@@ -6,6 +6,8 @@ import UserNavBar from "./UserNavBar";
 import CartNavBar from "./CartNavBar";
 import FavoriteNavBar from "./FavoriteNavBar";
 
+import LogoText from "../../../public/DFlowLogoText.png";
+
 const NavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -19,7 +21,7 @@ const NavBar = () => {
         {/* Logo Section */}
         <Box display="flex" alignItems="center">
           <img
-            src="src/assets/DFlowLogoText.png"
+            src={LogoText}
             alt="Store Logo"
             style={{
               width: "120px",
