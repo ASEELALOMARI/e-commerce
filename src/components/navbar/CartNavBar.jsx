@@ -16,7 +16,7 @@ function CartNavBar() {
   }, [cartItem]);
 
   const handelOpenCart = () => {
-    navigate("Shopping-cart");
+    navigate("/Shopping-cart");
   };
 
   return (
