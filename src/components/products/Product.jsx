@@ -17,7 +17,7 @@ import {
   FavoriteBorder,
   Favorite,
 } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Theme from "../../styles/Theme";
 import UseCartContext from "../../hooks/UseCartContext";
@@ -29,6 +29,7 @@ function Product({ data }) {
   const { cartItem, addToCart } = UseCartContext();
   const { isLoggedIn } = useAuthContext();
   const { toggleWishlist, isProductInWishlist } = UseWishlistContext();
+  const navigate = useNavigate();
 
   // Check if the product is already in the cart
   const isInCart = cartItem.some((item) => item.productId === data.productId);
@@ -55,11 +56,18 @@ function Product({ data }) {
         maxWidth: 345,
         boxShadow: 1,
         borderRadius: 2,
+        cursor: "pointer",
+        "&:hover": {
+          opacity: 0.9,
+          transform: "scale(1.02)",
+          transition: "all 0.3s ease-in-out",
+        },
       }}
     >
       {/* Product Image */}
       <CardMedia
         component="img"
+        onClick={() => navigate(`/productsDetails/${data.productId}`)}
         height="200"
         image={data.imageURL}
         alt={data.name}
