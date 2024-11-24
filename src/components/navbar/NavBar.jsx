@@ -104,13 +104,13 @@ const NavBar = () => {
           </Box>
           <Divider />
           <List>
-            <ListItem button component={Link} to="/">
+            <ListItem button="true" component={Link} to="/">
               <ListItemText primary="Home" />
             </ListItem>
-            <ListItem button component={Link} to="/products">
+            <ListItem button="true" component={Link} to="/products">
               <ListItemText primary="Products" />
             </ListItem>
-            <ListItem button component={Link} to="/category">
+            <ListItem button="true" component={Link} to="/category">
               <ListItemText primary="Category" />
             </ListItem>
           </List>
