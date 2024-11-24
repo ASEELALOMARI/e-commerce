@@ -1,10 +1,31 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, Box, Button, IconButton, Drawer, List, ListItem, ListItemText, Divider } from "@mui/material";
-import { Menu as MenuIcon, Home, Category, NewReleases, ShoppingBag } from "@mui/icons-material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Button,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from "@mui/material";
+import {
+  Menu as MenuIcon,
+  Home,
+  Category,
+  NewReleases,
+  ShoppingBag,
+} from "@mui/icons-material";
 import SearchBox from "./SearchBox";
 import UserNavBar from "./UserNavBar";
 import CartNavBar from "./CartNavBar";
 import FavoriteNavBar from "./FavoriteNavBar";
+
+import LogoText from "../../../public/DFlowLogoText.png";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -14,12 +35,15 @@ const NavBar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: "white", boxShadow: "none", paddingX: 2 }}>
+    <AppBar
+      position="static"
+      sx={{ backgroundColor: "white", boxShadow: "none", paddingX: 2 }}
+    >
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* Logo Section */}
         <Box display="flex" alignItems="center">
           <img
-            src="src/assets/DFlowLogoText.png"
+            src={LogoText}
             alt="Store Logo"
             style={{
               width: "120px",
@@ -31,16 +55,13 @@ const NavBar = () => {
 
         {/* Desktop Navigation Links */}
         <Box sx={{ display: { xs: "none", md: "flex" }, gap: 3 }}>
-          <Button color="inherit" href="/" sx={{ color: "black" }} >
+          <Button component={Link} to="/" sx={{ color: "black" }}>
             Home
           </Button>
-          <Button color="inherit" href="/products" sx={{ color: "black" }}>
+          <Button component={Link} to="/products" sx={{ color: "black" }}>
             Products
           </Button>
-          {/* <Button color="inherit" href="/new" sx={{ color: "black" }} >
-            New
-          </Button> */}
-          <Button color="inherit" href="/category" sx={{ color: "black" }}>
+          <Button component={Link} to="/category" sx={{ color: "black" }}>
             Category
           </Button>
         </Box>
@@ -59,7 +80,12 @@ const NavBar = () => {
 
         {/* Mobile Menu Icon */}
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
-          <IconButton edge="start" color="primary" aria-label="menu" onClick={handleDrawerToggle}>
+          <IconButton
+            edge="start"
+            color="primary"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+          >
             <MenuIcon />
           </IconButton>
         </Box>
@@ -69,23 +95,22 @@ const NavBar = () => {
       <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerToggle}>
         <Box sx={{ width: 250, padding: 2 }} role="presentation">
           {/* User Actions in Drawer */}
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}>
+          <Box
+            sx={{ display: "flex", justifyContent: "center", gap: 2, mt: 2 }}
+          >
             <UserNavBar />
             <CartNavBar />
             <FavoriteNavBar />
           </Box>
           <Divider />
           <List>
-            <ListItem button component="a" href="/">
+            <ListItem button component={Link} to="/">
               <ListItemText primary="Home" />
             </ListItem>
-            <ListItem button component="a" href="/products">
+            <ListItem button component={Link} to="/products">
               <ListItemText primary="Products" />
             </ListItem>
-            {/* <ListItem button component="a" href="/new">
-              <ListItemText primary="New" />
-            </ListItem> */}
-            <ListItem button component="a" href="/category">
+            <ListItem button component={Link} to="/category">
               <ListItemText primary="Category" />
             </ListItem>
           </List>

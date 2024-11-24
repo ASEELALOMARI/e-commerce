@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, Button, useMediaQuery, useTheme } from "@mui/material";
 import { styled } from "@mui/system";
+import HomeImage from "../../assets/WebHeroImage.jpg"
 
 const HeroSection = styled(Box)(({ theme, bgImage }) => ({
   position: "relative",
@@ -79,7 +80,7 @@ const ShopButton = styled(Button)({
 const Hero = () => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const bgImage = !isSmallScreen ? "src/assets/WebHeroImage.jpg" : null; // Adjust path as needed
+  const bgImage = !isSmallScreen ? HomeImage : null; // Adjust path as needed
 
   return (
     <HeroSection style={{ backgroundImage: bgImage ? `url(${bgImage})` : "none" }}>
