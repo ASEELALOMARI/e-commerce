@@ -10,28 +10,34 @@ import {
   Skeleton,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { AddShoppingCart, FavoriteBorder } from "@mui/icons-material";
+import { AddShoppingCart, Favorite, FavoriteBorder } from "@mui/icons-material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+
 import NotFound from "../responses/NotFound";
 import { fetchProductById } from "../../services/ProductsService";
 import ProductComments from "./ProductComments";
 import UseCartContext from "../../hooks/UseCartContext";
+import useAuthContext from "../../hooks/UseAuthContext";
+import UseWishlistContext from "../../hooks/UseWishlistContext";
+import { showErrorMessage } from "../../utility/ToastMessages";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { isLoggedIn } = useAuthContext();
+  const { toggleWishlist, isProductInWishlist } = UseWishlistContext();
 
   const { cartItem, addToCart, updateQuantity } = UseCartContext();
-    // Check if the product is already in the cart
-    const isInCart = cartItem.some((item) => item.productId === id);
-    const quantityInCart = cartItem
-      .filter((item) => item.productId === id)
-      .reduce((total, item) => total + item.quantity, 0);
-  
-    const [quantity, setQuantity] = useState(quantityInCart || 1);
+  // Check if the product is already in the cart
+  const isInCart = cartItem.some((item) => item.productId === id);
+  const quantityInCart = cartItem
+    .filter((item) => item.productId === id)
+    .reduce((total, item) => total + item.quantity, 0);
+
+  const [quantity, setQuantity] = useState(quantityInCart || 1);
 
   const getProductById = async (id) => {
     setIsLoading(true);
@@ -50,18 +56,18 @@ const ProductDetails = () => {
     getProductById(id);
   }, [id]);
 
- // Handle quantity increase
-const handleIncrease = () => {
-  // Ensure quantity doesn't exceed product stock quantity
-  if (quantity < product.stockQuantity) {
-    const newQuantity = quantity + 1;
-    setQuantity(newQuantity);
+  // Handle quantity increase
+  const handleIncrease = () => {
+    // Ensure quantity doesn't exceed product stock quantity
+    if (quantity < product.stockQuantity) {
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
 
-    if (isInCart) {
-      updateQuantity(id, 1);
+      if (isInCart) {
+        updateQuantity(id, 1);
+      }
     }
-  }
-};
+  };
   // Handle quantity decrease
   const handleDecrease = () => {
     if (quantity > 1) {
@@ -76,6 +82,15 @@ const handleIncrease = () => {
   // Handle adding item to the cart
   const handleAddToCart = () => {
     addToCart({ ...product, quantity });
+  };
+
+  // Handle add or remove item from the wishlist
+  const handleWishlistClick = () => {
+    if (!isLoggedIn) {
+      showErrorMessage("You need to log in first");
+      return;
+    }
+    toggleWishlist(product);
   };
 
   return (
@@ -206,10 +221,18 @@ const handleIncrease = () => {
                     <Button
                       variant="outlined"
                       color="secondary"
-                      startIcon={<FavoriteBorder />}
-                      sx={{ flexGrow: 1 }}
+                      startIcon={
+                        isProductInWishlist(product.productId) ? (
+                          <Favorite />
+                        ) : (
+                          <FavoriteBorder />
+                        )
+                      }
+                      onClick={handleWishlistClick}
                     >
-                      Add to Wishlist
+                      {isProductInWishlist(product.productId)
+                        ? "Remove from Wishlist"
+                        : "Add to Wishlist"}
                     </Button>
                   </Box>
                 </Grid>

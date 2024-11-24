@@ -14,14 +14,17 @@ import { Link } from "react-router-dom";
 
 import reactLogo from "../../assets/DFlowLogo.png";
 import useAuthContext from "../../hooks/UseAuthContext";
+import UseWishlistContext from "../../hooks/UseWishlistContext";
 
 const DashboardNavBar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const { logout } = useAuthContext();
   const storedUser = JSON.parse(localStorage.getItem("user"));
+  const {clearLocalWishlist} = UseWishlistContext();
 
   const handleLogout = () => {
     logout();
+    clearLocalWishlist();
     handleMenuClose();
   };
 

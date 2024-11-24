@@ -12,14 +12,17 @@ import { Link } from "react-router-dom";
 import useAuthContext from "../../hooks/UseAuthContext";
 import { FaJediOrder } from "react-icons/fa";
 import { RiOrderPlayFill } from "react-icons/ri";
+import UseWishlistContext from "../../hooks/UseWishlistContext";
 
 function UserNavBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const { isAdmin, isLoggedIn, logout } = useAuthContext();
   const storedUser = JSON.parse(localStorage.getItem("user"));
+  const {clearLocalWishlist} = UseWishlistContext();
 
   const handleLogout = () => {
     logout();
+    clearLocalWishlist();
     handleMenuClose();
   };
 

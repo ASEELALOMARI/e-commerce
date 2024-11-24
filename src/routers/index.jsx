@@ -5,6 +5,7 @@ import { ProductsProvider } from "../contexts/ProductsContext";
 import { CategoriesProvider } from "../contexts/CategoriesContext";
 import { CartProvider } from "../contexts/CartContext";
 import { UsersProvider } from "../contexts/UsersContext";
+import { WishlistProvider } from "../contexts/WishlistContext";
 
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import ProtectedRoute from "./ProtectedRoute";
@@ -32,15 +33,18 @@ import ManageUsers from "../components/Admin/manegeUsers/ManegeUsers";
 import ManegeCategories from "../components/Admin/manegeCategories/ManegeCategories";
 import ManageOrders from "../components/Admin/manegeOrders/ManegeOrders";
 import UpdateCategory from "../components/Admin/manegeCategories/UpdateCategory";
+import WishlistComponent from "../components/wishlist/WishlistComponent";
 
 const PropertyWrapper = () => (
   <CartProvider>
     <AuthProvider>
       <UsersProvider>
         <ProductsProvider>
+          <WishlistProvider>
           <CategoriesProvider>
             <Outlet />
           </CategoriesProvider>
+          </WishlistProvider>
         </ProductsProvider>
       </UsersProvider>
     </AuthProvider>
@@ -83,6 +87,10 @@ const Index = createBrowserRouter([
               {
                 path: "user-orders",
                 element: <UserOrders/>,
+              },
+              {
+                path: "user-wishlist",
+                element: <WishlistComponent/>,
               },
             ],
           },

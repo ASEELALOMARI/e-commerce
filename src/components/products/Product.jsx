@@ -15,22 +15,38 @@ import {
   AddShoppingCart,
   ShoppingCart,
   FavoriteBorder,
+  Favorite,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import UseCartContext from "../../hooks/UseCartContext";
+
 import Theme from "../../styles/Theme";
+import UseCartContext from "../../hooks/UseCartContext";
+import UseWishlistContext from "../../hooks/UseWishlistContext";
+import useAuthContext from "../../hooks/UseAuthContext";
+import { showErrorMessage } from "../../utility/ToastMessages";
 
 function Product({ data }) {
   const { cartItem, addToCart } = UseCartContext();
+  const { isLoggedIn } = useAuthContext();
+  const { toggleWishlist, isProductInWishlist } = UseWishlistContext();
 
   // Check if the product is already in the cart
   const isInCart = cartItem.some((item) => item.productId === data.productId);
   const numberInCart = cartItem
-  .filter((item) => item.productId === data.productId)
-  .reduce((total, item) => total + item.quantity, 0);
+    .filter((item) => item.productId === data.productId)
+    .reduce((total, item) => total + item.quantity, 0);
 
   const handleAddItemToCart = () => {
     addToCart(data);
+  };
+
+  // Handle adding or removing items from wishlist
+  const handleWishlistClick = () => {
+    if (!isLoggedIn) {
+      showErrorMessage("You need to log in first");
+      return;
+    }
+    toggleWishlist(data);
   };
 
   return (
@@ -94,8 +110,16 @@ function Product({ data }) {
             <AddShoppingCart />
           )}
         </IconButton>
-        <IconButton aria-label="Add to Wishlist" color="secondary">
-          <FavoriteBorder />
+        <IconButton
+          aria-label="Add to Wishlist"
+          color="secondary"
+          onClick={handleWishlistClick}
+        >
+          {isProductInWishlist(data.productId) ? (
+            <Favorite />
+          ) : (
+            <FavoriteBorder />
+          )}
         </IconButton>
       </CardActions>
     </Card>
