@@ -15,12 +15,12 @@ export default function HomePage() {
         <Hero />
       </Box>
       {/* Category list */}
-      <Box sx={{ px: 12 }}>
+      <Box sx={{ px: { xs: 2, md: 8 } }}>
         <CategoryList />
       </Box>
 
       {/*  Product list */}
-      <Box sx={{ px: 12 }}>
+      <Box sx={{ px: { xs: 2, md: 8 } }}>
         <Products />
       </Box>
     </HomeLayout>
